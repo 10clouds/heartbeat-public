@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="socket-connection"
+                 attributes="endpoint">
+  <script>
+  (function () {
+    var protocol = window.location.protocol;
+    var hostname = window.location.hostname;
+    var socketUrl = protocol + '//' + hostname + ':3000';
+    var connectionLostTime = new Date();
+    var RESTART_DELAY_MS = 30 * 1000;
+
+    var socket = io.connect(socketUrl);
+    window.addEventListener('polymer-ready', function () {
+      socket.emit('established');
+    });
+    socket.on('connect', function () {
+      if (new Date() - connectionLostTime > RESTART_DELAY_MS) {
+        console.log('Server was offline longer than ' +
+                    (RESTART_DELAY_MS / 1000) +
+                    ', reloading page.');
+        location.reload(true);
+      }
+    });
+
+    Polymer({
+      ready: function () {
+        if (this.endpoint) {
+          var self = this;
+          socket.on(this.endpoint, function (data) {
+            self.fire('data', data);
+          });
+        }
+      }
+    });
+
+  })();
+  </script>
+</polymer-element>

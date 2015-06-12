@@ -1,0 +1,37 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<polymer-element name="hb-github-pr-tile">
+  <template>
+    <style>
+      hb-tile {
+        background: #fad733;
+      }
+
+      :host(:nth-child(even)) hb-tile {
+        background: #eed329;
+      }
+    </style>
+
+    <hb-tile id="tile">
+      <value>{{ openPullRequests }}</value>
+      <header>open pr</header>
+      <description>this week</description>
+      <endpoint>Github</endpoint>
+    </hb-tile>
+
+    <socket-connection endpoint="github"
+                       on-data="{{onData}}">
+    </socket-connection>
+
+  </template>
+  <script>
+    Polymer({
+      openPullRequests: 0,
+      onData: function (ev, data) {
+        this.openPullRequests = data.pull_requests;
+        this.$.tile.ping();
+      }
+    });
+  </script>
+</polymer-element>

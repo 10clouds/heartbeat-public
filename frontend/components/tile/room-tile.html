@@ -1,0 +1,88 @@
+<link rel="import" href="tile.html">
+<link rel="import" href="../socket-connection.html">
+
+<polymer-element name="hb-room-tile"
+                 attributes="room-name">
+  <template>
+    <style>
+      a {
+        text-decoration: none;
+        color: yellow;
+      }
+      hb-tile {
+        background: #f05800;
+      }
+
+      hb-tile.busy {
+        background-color: #C72702;
+      }
+
+      :host(.hidden) {
+        display: none;
+      }
+
+      :host(:nth-child(even)) hb-tile {
+        background: #ff6600;
+      }
+
+      :host(:nth-child(even)) hb-tile.busy {
+        background: #C02000;;
+      }
+    </style>
+
+    <hb-tile id="tile">
+      <value>{{ status }}</value>
+      <header>
+        <template if="{{!until}}">
+          <!-- <a target="_blank" href="{{ serverAddr }}">Click to reserve</a> -->
+          <span>&nbsp;</span>
+        </template>
+        <template if="{{until}}">
+          <span>{{ until }}</span>
+        </template>
+      </header>
+      <description>{{ roomName }}</description>
+      <endpoint>Rooms</endpoint>
+    </hb-tile>
+
+    <socket-connection endpoint="rooms"
+                       on-data="{{onData}}">
+    </socket-connection>
+  </template>
+  <script>
+    Polymer({
+      status: 'Free',
+      until: false,
+      // serverAddr: null,
+      ready: function () {
+        this.roomName = this['room-name'];
+      },
+      onData: function (ev, data) {
+        var key = this['room-name'] + 'Room';
+        var val = data[key];
+        var now = new Date();
+
+        this.classList.toggle('hidden', !val);
+        this.$.tile.classList.remove('busy');
+        this.until = false;
+        this.status = 'Free';
+        // this.serverAddr = data.serverAddr;
+        if (val) {
+          val.forEach(function (event) {
+            var evtStart = new Date(event.start);
+            var evtEnd = new Date(event.end);
+            if (now > evtStart && now < evtEnd) {
+              this.status = 'busy';
+              this.until = 'till ' +
+                evtEnd.getHours() + ':' +
+                (evtEnd.getMinutes() < 10 ? '0' +
+                 evtEnd.getMinutes() : evtEnd.getMinutes() );
+              this.$.tile.classList.add('busy');
+            }
+          }, this);
+        }
+        this.$.tile.ping();
+      }
+    });
+  </script>
+</polymer-element>

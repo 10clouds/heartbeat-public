@@ -1,0 +1,38 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<polymer-element name="hb-github-leader-tile">
+  <template>
+    <style>
+      hb-tile {
+        background: #fad733;
+      }
+
+      :host(:nth-child(even)) hb-tile {
+        background: #eed329;
+      }
+    </style>
+
+    <hb-tile id="tile" class="github">
+      <value>{{ leader }}</value>
+      <header>commit master</header>
+      <description>today</description>
+      <endpoint>Github</endpoint>
+    </hb-tile>
+
+    <socket-connection endpoint="github"
+                       on-data="{{onData}}">
+    </socket-connection>
+
+  </template>
+  <script>
+    Polymer({
+      leader: 'Nobody',
+      onData: function (ev, data) {
+        this.leader = data.top_commiter;
+        this.$.tile.ping();
+        this.$.tile.autosizeFont(this.leader);
+      }
+    });
+  </script>
+</polymer-element>

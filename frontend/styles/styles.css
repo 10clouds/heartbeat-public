@@ -1,0 +1,12 @@
+body {
+  font-family: "axis", arial, sans-serif;
+  color: #113738;
+  background: #113738;
+  text-transform: uppercase;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+body::-webkit-scrollbar {
+  width: 0 !important;
+}

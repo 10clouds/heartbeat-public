@@ -1,0 +1,36 @@
+module.exports = exports = {
+    HttpPort: 8123,
+    WebSocketsPort: 3000,
+    plugins: {
+        // we can override specific plugin options here
+        ion: {
+            serverUrl: '',
+            token: '',
+            // ion now not have hardly specified 'home' location. locations can
+            // be dynamically defined by admins. we can't be sure about index of
+            // home location, so we set in here, in options.
+            homeLocationIndex: 1
+        },
+        rooms: {
+            serverUrl: '',
+            timeout: 500
+        },
+        github: {
+            serverUrl: '',
+            user: '',
+            org: '',
+        },
+        slack: {
+            token: '',
+            channels: []
+        },
+        network: {
+            maxCap: 1024 * 1024 * 40 * 60, // 40mbits in one minute
+            maxCharPoints: 20,
+            sourceFilePath: ''
+        },
+        weather: {
+            serverUrl: 'http://188.226.224.148/data/2.5/weather?q=Warsaw,pl',
+        },
+    }
+};

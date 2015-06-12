@@ -1,0 +1,100 @@
+<link rel="import" href="../base.html">
+
+<polymer-element name="hb-tile">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background: #fff;
+        color: #113738;
+        position: relative;
+        -webkit-transition: -webkit-transform 500ms;
+        -moz-transition: -moz-transform 500ms;
+        -ms-transition: -ms-transform 500ms;
+        -o-transition: -o-transform 500ms;
+        transition: transform 500ms;
+      }
+      :host(.beat) {
+        -webkit-transform: scale(1.05,1.05);
+        -moz-transform: scale(1.05,1.05);
+        -ms-transform: scale(1.05,1.05);
+        -o-transform: scale(1.05,1.05);
+        transform: scale(1.05,1.05);
+      }
+
+      .content-container {
+        padding: 2em 0;
+      }
+
+      .content-container ::content > * {
+        display: block;
+        text-align: center;
+        margin: 12px 0;
+      }
+
+      .content-container ::content > value {
+        white-space: nowrap;
+        font-size: 72px;
+        line-height: 1;
+        margin-top: 20px;
+        min-height: 72px;
+      }
+
+      .content-container ::content > header {
+        font-size: 12px;
+      }
+
+      .content-container ::content > description {
+        font-size: 15px;
+        letter-spacing: 10px;
+      }
+
+      .content-container ::content > endpoint {
+        font-size: 12px;
+        color: white;
+      }
+    </style>
+
+    <div class="content-container">
+      <content id="value" select="value"><value>&nbsp;</value></content>
+      <content select="header"><header>&nbsp;</header></content>
+      <content select="description"><description>&nbsp;</description></content>
+      <content select="endpoint"><endpoint>&nbsp;</endpoint></content>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      ping: function () {
+        var el = this;
+        el.classList.add('beat');
+        setTimeout(function(){
+          el.classList.remove('beat');
+        }, 250);
+      },
+      autosizeFont: function (value) {
+        var maxFontSize = 73;
+        var valueEl = this.querySelector('value');
+
+        // measure text at maxFontSize
+        var measureEl = document.createElement('span');
+        measureEl.style.visibility = 'hidden';
+        measureEl.style.fontSize = maxFontSize + 'px';
+        measureEl.style.whiteSpace = 'nowrap';
+        measureEl.style.padding = 0;
+        measureEl.style.margin = 0;
+        measureEl.innerHTML = value;
+        this.shadowRoot.appendChild(measureEl);
+        var valueWidth = measureEl.offsetWidth;
+        this.shadowRoot.removeChild(measureEl);
+
+        // calculate the font size, so it fits the tile
+        var fontScale = Math.min(this.offsetWidth / valueWidth, 1);
+        var fontSize = Math.floor(fontScale * maxFontSize) - 6;
+
+        valueEl.style.fontSize = fontSize + 'px';
+        valueEl.style.lineHeight = (maxFontSize - 6)/ fontSize;
+      }
+    });
+  </script>
+</polymer-element>

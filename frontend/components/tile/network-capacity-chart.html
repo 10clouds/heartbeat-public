@@ -1,0 +1,123 @@
+<link rel="import" href="../base.html">
+<link rel="import" href="../socket-connection.html">
+
+<polymer-element name="hb-network-capacity-chart">
+  <template>
+    <style>
+      :host{
+        height: 237px;
+        background: #BC7DE0;
+        -webkit-transition: -webkit-transform 500ms;
+        -moz-transition: -moz-transform 500ms;
+        -ms-transition: -ms-transform 500ms;
+        -o-transition: -o-transform 500ms;
+        transition: transform 500ms;
+      }
+      :host(.beat) {
+        -webkit-transform: scale(1.05,1.05);
+        -moz-transform: scale(1.05,1.05);
+        -ms-transform: scale(1.05,1.05);
+        -o-transform: scale(1.05,1.05);
+        transform: scale(1.05,1.05);
+      }
+      :host canvas {
+        margin-top: 1%;
+        margin-left: 1.5%;
+      }
+    </style>
+    <canvas id="myChart" height="243" width="100"></canvas>
+    <socket-connection endpoint="network"
+                       on-data="{{onData}}">
+    </socket-connection>
+  </template>
+  <script>
+    Polymer({
+      prevData: 100,
+      maxCap: 0,
+      maxCharPoints: 0,
+      capacityChart: undefined,
+      chart: {
+          labels: [],
+          datasets: [
+              {
+                  label: 'Network Capacity',
+                  fillColor: 'rgba(220,220,220,0.2)',
+                  strokeColor: 'rgba(220,220,220,1)',
+                  pointColor: 'rgba(220,220,220,1)',
+                  pointStrokeColor: '#fff',
+                  pointHighlightFill: '#fff',
+                  pointHighlightStroke: 'rgba(220,220,220,1)',
+                  data: []
+              }
+          ]
+      },
+      ping: function () {
+        var el = this;
+        el.classList.add('beat');
+        setTimeout(function(){
+          el.classList.remove('beat');
+        }, 250);
+      },
+      formatDate: function (date) {
+        return date.getHours() + ':' +
+          (date.getMinutes() > 9 ?
+            date.getMinutes() :
+            '0' + date.getMinutes()
+          );
+      },
+      onData: function (data) {
+        var bytesArr = data.detail.usageHistory;
+        for (var point in bytesArr) {
+          this.capacityChart.addData(
+            [bytesArr[point].bytes],
+            this.formatDate(new Date(bytesArr[point].time))
+          );
+        }
+        while (this.capacityChart.datasets[0].points.length > data.detail.maxCharPoints) {
+          this.capacityChart.removeData();
+        }
+        this.ping();
+        this.capacityChart.update();
+      },
+      ready: function () {
+        this.$.myChart.width = this.clientWidth * 0.96;
+        this.$.myChart.height = document.querySelector('.app-logo').clientHeight * 0.96;
+        var ctx = this.$.myChart.getContext('2d');
+        this.capacityChart = new Chart(ctx).Line(this.chart, {
+          // Boolean - Whether to animate the chart
+          animation: false,
+          // Boolean - If we want to override with a hard coded scale
+          scaleOverride: true,
+          // Number - The number of steps in a hard coded scale
+          scaleSteps: 10,
+          // Number - The value jump in the hard coded scale
+          scaleStepWidth: 10,
+          // Number - The scale starting value
+          scaleStartValue: 0,
+          // Boolean - whether or not the chart should be responsive and resize when the browser does.
+          responsive: false,
+          // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+          maintainAspectRatio: false,
+          // Boolean - Determines whether to draw tooltips on the canvas or not
+          showTooltips: false,
+          // Boolean - Whether to show a dot for each point
+          pointDot : true,
+          // Number - Radius of each point dot in pixels
+          pointDotRadius : 2,
+          // Number - Pixel width of point dot stroke
+          pointDotStrokeWidth : 1,
+          // Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+          pointHitDetectionRadius : 0,
+          // String - Colour of the grid lines
+          scaleGridLineColor : "rgba(255,255,255,.1)",
+          // String - Scale label font colour
+          scaleFontColor: "rgba(255,255,255,.5)",
+          // Number - Scale label font size in pixels
+          scaleFontSize: 11,
+        });
+        this.$.myChart.style.width = this.clientWidth * 0.96 + 'px';
+        this.$.myChart.style.height = document.querySelector('.app-logo').clientHeight * 0.96 + 'px';
+      }
+    })
+  </script>
+</polymer-element>

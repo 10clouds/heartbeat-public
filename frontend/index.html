@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Heartbeat</title>
+  <link rel="stylesheet" type="text/css" href="styles/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="styles/fonts.css" />
+  <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <hb-breaking></hb-breaking>
+
+  <hb-tiles-grid>
+    <hb-welcome-tile class="tile app-logo"></hb-welcome-tile>
+
+    <hb-ion-people-tile class="tile"></hb-ion-people-tile>
+    <hb-ion-homeoffice-tile class="tile"></hb-ion-homeoffice-tile>
+
+    <hb-github-pr-tile class="tile"></hb-github-pr-tile>
+    <hb-github-commits-tile class="tile"></hb-github-commits-tile>
+    <hb-github-leader-tile class="tile"></hb-github-leader-tile>
+
+    <hb-slack-latest-gif-tile class="tile"></hb-slack-latest-gif-tile>
+
+    <hb-room-tile class="tile" room-name="conference"></hb-room-tile>
+    <hb-room-tile class="tile" room-name="social"></hb-room-tile>
+    <hb-room-tile class="tile" room-name="hamakownia"></hb-room-tile>
+
+    <hb-slack-users-tile class="tile"></hb-slack-users-tile>
+    <hb-weather-tile class="tile"></hb-weather-tile>
+    <hb-network-capacity-chart class="tile large"></hb-network-capacity-chart>
+
+  </hb-tiles-grid>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+  <script src="../bower_components/socket.io-client/socket.io.js"></script>
+  <script src="../bower_components/Chart.js/Chart.js"></script>
+
+  <link rel="import" href="../components/base.html">
+  <link rel="import" href="../components/socket-connection.html">
+  <link rel="import" href="../components/breaking/breaking.html">
+  <link rel="import" href="../components/tiles-grid/tiles-grid.html">
+  <link rel="import" href="../components/tile/tile.html">
+  <link rel="import" href="../components/tile/welcome-tile.html">
+  <link rel="import" href="../components/tile/ion/people-tile.html">
+  <link rel="import" href="../components/tile/ion/homeoffice-tile.html">
+  <link rel="import" href="../components/tile/github/pr-tile.html">
+  <link rel="import" href="../components/tile/github/commits-tile.html">
+  <link rel="import" href="../components/tile/github/leader-tile.html">
+  <link rel="import" href="../components/tile/room-tile.html">
+  <link rel="import" href="../components/tile/weather-tile.html">
+  <link rel="import" href="../components/tile/network-capacity-chart.html">
+  <link rel="import" href="../components/tile/slack/users-tile.html">
+  <link rel="import" href="../components/tile/slack/latest-gif-tile.html">
+</body>
+</html>

@@ -1,0 +1,74 @@
+<polymer-element name="hb-tiles-grid" noscript>
+  <template>
+    <style>
+      .grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        -webkit-flex-direction: row;
+        -webkit-flex-wrap: wrap;
+      }
+      .grid ::content > * {
+        float: left;
+      }
+
+      /* Phones */
+      @media (max-width: 559px) {
+        .grid ::content > * {
+          width: 50%;
+        }
+
+        .grid ::content > .large {
+          width: 100%;
+        }
+      }
+
+      /* Small tablets */
+      @media (min-width: 560px) {
+        .grid ::content > * {
+          width: 33.3333%;
+        }
+
+        .grid ::content > .large {
+          width: 66.6667%;
+        }
+      }
+
+      /* Tablets  */
+      @media (min-width: 992px) {
+        .grid ::content > * {
+          width: 25%;;
+        }
+
+        .grid ::content > .large {
+          width: 50%;
+        }
+      }
+
+      /* Laptops */
+      @media (min-width: 1280px) {
+        .grid ::content > * {
+          width: 20%;;
+        }
+
+        .grid ::content > .large {
+          width: 40%;
+        }
+      }
+
+      /* Large desktops */
+      @media (min-width: 1600px) {
+        .grid ::content > * {
+          width: 16.6667%;;
+        }
+
+        .grid ::content > .large {
+          width: 33.3333%;
+        }
+      }
+    </style>
+    <div class="grid">
+      <content></content>
+    </div>
+  </template>
+</polymer-element>

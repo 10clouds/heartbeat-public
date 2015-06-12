@@ -1,0 +1,16 @@
+backend:
+  build: ./backend
+  command: nodemon --harmony src/index.js
+  ports:
+   - "3000:3000"
+   - "8123:8123"
+  volumes:
+   - ./backend:/usr/src/app
+frontend:
+  build: ./frontend
+  command: nginx
+  ports:
+   - "8080:80"
+  volumes:
+   - ./frontend:/usr/share/nginx/html
+   - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro

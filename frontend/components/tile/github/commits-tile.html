@@ -1,0 +1,37 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<polymer-element name="hb-github-commits-tile">
+  <template>
+    <style>
+      hb-tile {
+        background: #fad733;
+      }
+
+      :host(:nth-child(even)) hb-tile {
+        background: #eed329;
+      }
+    </style>
+
+    <hb-tile id="tile">
+      <value>{{ commitsCount }}</value>
+      <header>commits</header>
+      <description>today</description>
+      <endpoint>Github</endpoint>
+    </hb-tile>
+
+    <socket-connection endpoint="github"
+                       on-data="{{onData}}">
+    </socket-connection>
+
+  </template>
+  <script>
+    Polymer({
+      commitsCount: 0,
+      onData: function (ev, data) {
+        this.commitsCount = data.commits;
+        this.$.tile.ping();
+      }
+    });
+  </script>
+</polymer-element>

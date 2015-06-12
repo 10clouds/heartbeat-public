@@ -1,0 +1,57 @@
+<polymer-element name="hb-welcome-tile">
+  <template>
+  <style>
+
+    .app-logo {
+      background: #113738;
+      color: #fff;
+    }
+
+    .app-logo value {
+      position: absolute;
+      top: 40%;
+      left: 0;
+      width: 100%;
+      font-size: 28px !important;
+    }
+
+    .app-logo header {
+      position: absolute;
+      top: 85%;
+      left: 0;
+      width: 100%;
+      font-size: 3em !important;
+    }
+
+  </style>
+    <hb-tile class="tile app-logo">
+      <value class="app-logo-value">Heartbeat</value>
+      <header class="app-logo-value">{{ currentTime }}</header>
+    </hb-tile>
+  </template>
+  <script>
+    Polymer({
+      currentTime: '00:00:00',
+
+      formatDate: function (date) {
+        return date.getHours() + ':' +
+          (date.getMinutes() > 9 ?
+            date.getMinutes() :
+            '0' + date.getMinutes()
+          ) + ':' +
+          (date.getSeconds() > 9 ?
+            date.getSeconds() :
+            '0' + date.getSeconds()
+          );
+      },
+
+      ready: function() {
+        var that = this;
+        setInterval(function () {
+          var date = new Date();
+          that.currentTime = that.formatDate(date);
+        }, 1000);
+      }
+    });
+  </script>
+</polymer-element>

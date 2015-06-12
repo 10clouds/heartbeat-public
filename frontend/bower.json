@@ -1,0 +1,22 @@
+{
+  "name": "heartbeat-v2",
+  "version": "0.0.2",
+  "authors": [
+    "Norbert Sienkiewicz <norbert.sienkiewicz@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "socket.io-client": "~1.3.2",
+    "polymer": "~0.5.4",
+    "weather-icons": "~1.3.2",
+    "Chart.js": "~1.0.1"
+  }
+}

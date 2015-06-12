@@ -1,0 +1,37 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<polymer-element name="hb-ion-homeoffice-tile">
+  <template>
+    <style>
+      hb-tile {
+        background: #44c644;
+      }
+
+      :host(:nth-child(even)) hb-tile {
+        background: #36bd36;
+      }
+    </style>
+
+    <hb-tile id="tile">
+      <value>{{ homeOfficeCount }}</value>
+      <header>people</header>
+      <description>@Home</description>
+      <endpoint>ION</endpoint>
+    </hb-tile>
+
+    <socket-connection endpoint="ion"
+                       on-data="{{onData}}">
+    </socket-connection>
+
+  </template>
+  <script>
+    Polymer({
+      homeOfficeCount: 0,
+      onData: function (ev, data) {
+        this.homeOfficeCount = data.homeoffice;
+        this.$.tile.ping();
+      }
+    });
+  </script>
+</polymer-element>
