@@ -20,6 +20,8 @@
   "smarttabs": true,
   "expr": true,
   "globals": {
-    "Promise": true
+    "Promise": true,
+    "io": true,
+    "Polymer": true
   }
 }
