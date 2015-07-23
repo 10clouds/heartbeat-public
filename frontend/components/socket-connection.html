@@ -28,7 +28,6 @@
         endpoint: String,
       },
       ready: function () {
-        console.log(this.endpoint);
         if (this.endpoint) {
           var self = this;
           socket.on(this.endpoint, function (data) {
