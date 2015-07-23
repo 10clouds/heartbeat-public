@@ -1,7 +1,5 @@
-<polymer-element name="hb-welcome-tile">
-  <template>
+<dom-module id="hb-welcome-tile">
   <style>
-
     .app-logo {
       background: #113738;
       color: #fff;
@@ -22,15 +20,18 @@
       width: 100%;
       font-size: 3em !important;
     }
-
   </style>
+
+  <template>
     <hb-tile class="tile app-logo">
       <value class="app-logo-value">Heartbeat</value>
       <header class="app-logo-value">{{ currentTime }}</header>
     </hb-tile>
   </template>
+
   <script>
     Polymer({
+      is: 'hb-welcome-tile',
       currentTime: '00:00:00',
 
       formatDate: function (date) {
@@ -54,4 +55,4 @@
       }
     });
   </script>
-</polymer-element>
+</dom-module>

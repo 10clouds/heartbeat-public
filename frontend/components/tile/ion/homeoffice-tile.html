@@ -1,18 +1,17 @@
 <link rel="import" href="../tile.html">
 <link rel="import" href="../../socket-connection.html">
 
-<polymer-element name="hb-ion-homeoffice-tile">
+<dom-module id="hb-ion-homeoffice-tile">
+  <style>
+    :host hb-tile {
+      background: #44c644;
+    }
+
+    :host(:nth-child(even)) hb-tile {
+      background: #36bd36;
+    }
+  </style>
   <template>
-    <style>
-      hb-tile {
-        background: #44c644;
-      }
-
-      :host(:nth-child(even)) hb-tile {
-        background: #36bd36;
-      }
-    </style>
-
     <hb-tile id="tile">
       <value>{{ homeOfficeCount }}</value>
       <header>people</header>
@@ -21,12 +20,13 @@
     </hb-tile>
 
     <socket-connection endpoint="ion"
-                       on-data="{{onData}}">
+                       on-data="onData">
     </socket-connection>
 
   </template>
   <script>
     Polymer({
+      is: 'hb-ion-homeoffice-tile',
       homeOfficeCount: 0,
       onData: function (ev, data) {
         this.homeOfficeCount = data.homeoffice;
@@ -34,4 +34,4 @@
       }
     });
   </script>
-</polymer-element>
+</dom-module>

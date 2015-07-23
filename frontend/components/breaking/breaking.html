@@ -1,70 +1,72 @@
-<polymer-element name="hb-breaking">
+<dom-module id="hb-breaking">
+  <style>
+    :host {
+      height: 40px;
+      display: block;
+      background: black;
+      color: white;
+      font-size: 19px;
+      line-height: 2.25;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    :host #news-wrapper{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    :host #news-list {
+      position: relative;
+      overflow: visible;
+      white-space: nowrap;
+    }
+
+    :host span {
+      margin: 0;
+    }
+
+    :host span:after {
+      content: "|";
+      margin: 0 .5em;
+    }
+
+    @-webkit-keyframes marquee {
+        0%   { -webkit-transform: translateX(0%) }
+        100% { -webkit-transform: translateX(-100%) }
+    }
+
+    @-moz-keyframes marquee {
+        0%   { -moz-transform: translateX(0%) }
+        100% { -moz-transform: translateX(-100%) }
+    }
+
+    @-ms-keyframes marquee {
+        0%   { -ms-transform: translateX(0%) }
+        100% { -ms-transform: translateX(-100%) }
+    }
+
+    @-o-keyframes marquee {
+        0%   { -o-transform: translateX(0%) }
+        100% { -o-transform: translateX(-100%) }
+    }
+
+    @keyframes marquee {
+        0%   { transform: translateX(0%) }
+        100% { transform: translateX(-100%) }
+    }
+  </style>
+
   <template>
-    <style>
-      :host {
-        height: 40px;
-        display: block;
-        background: black;
-        color: white;
-        font-size: 19px;
-        line-height: 2.25;
-        font-family: Helvetica, Arial, sans-serif;
-      }
-
-      :host #news-wrapper{
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-      :host #news-list {
-        position: relative;
-        overflow: visible;
-        white-space: nowrap;
-      }
-
-      :host span {
-        margin: 0;
-      }
-
-      :host span:after {
-        content: "|";
-        margin: 0 .5em;
-      }
-
-      @-webkit-keyframes marquee {
-          0%   { -webkit-transform: translateX(0%) }
-          100% { -webkit-transform: translateX(-100%) }
-      }
-
-      @-moz-keyframes marquee {
-          0%   { -moz-transform: translateX(0%) }
-          100% { -moz-transform: translateX(-100%) }
-      }
-
-      @-ms-keyframes marquee {
-          0%   { -ms-transform: translateX(0%) }
-          100% { -ms-transform: translateX(-100%) }
-      }
-
-      @-o-keyframes marquee {
-          0%   { -o-transform: translateX(0%) }
-          100% { -o-transform: translateX(-100%) }
-      }
-
-      @keyframes marquee {
-          0%   { transform: translateX(0%) }
-          100% { transform: translateX(-100%) }
-      }
-    </style>
     <div id="news-wrapper">
       <div id="news-list"></div>
     </div>
     <socket-connection endpoint="breaking"
-                       on-data="{{onData}}">
+                       on-data="onData">
     </socket-connection>
   </template>
   <script>
-    Polymer('hb-breaking', {
+    Polymer({
+      is: 'hb-breaking',
       newsList: [],
       refresh: function () {
         this.$['news-list'].innerHTML = '';
@@ -94,4 +96,4 @@
       }
     });
   </script>
-</polymer-element>
+</dom-module>

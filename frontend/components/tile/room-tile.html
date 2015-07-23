@@ -1,35 +1,33 @@
 <link rel="import" href="tile.html">
 <link rel="import" href="../socket-connection.html">
 
-<polymer-element name="hb-room-tile"
-                 attributes="room-name">
+<dom-module id="hb-room-tile">
+  <style>
+    a {
+      text-decoration: none;
+      color: yellow;
+    }
+    hb-tile {
+      background: #f05800;
+    }
+
+    hb-tile.busy {
+      background-color: #C72702;
+    }
+
+    :host(.hidden) {
+      display: none;
+    }
+
+    :host(:nth-child(even)) hb-tile {
+      background: #ff6600;
+    }
+
+    :host(:nth-child(even)) hb-tile.busy {
+      background: #C02000;;
+    }
+  </style>
   <template>
-    <style>
-      a {
-        text-decoration: none;
-        color: yellow;
-      }
-      hb-tile {
-        background: #f05800;
-      }
-
-      hb-tile.busy {
-        background-color: #C72702;
-      }
-
-      :host(.hidden) {
-        display: none;
-      }
-
-      :host(:nth-child(even)) hb-tile {
-        background: #ff6600;
-      }
-
-      :host(:nth-child(even)) hb-tile.busy {
-        background: #C02000;;
-      }
-    </style>
-
     <hb-tile id="tile">
       <value>{{ status }}</value>
       <header>
@@ -46,11 +44,15 @@
     </hb-tile>
 
     <socket-connection endpoint="rooms"
-                       on-data="{{onData}}">
+                       on-data="onData">
     </socket-connection>
   </template>
   <script>
     Polymer({
+      is: 'hb-room-tile',
+      properties: {
+        'room-name': String
+      },
       status: 'Free',
       until: false,
       // serverAddr: null,
@@ -85,4 +87,4 @@
       }
     });
   </script>
-</polymer-element>
+</dom-module>

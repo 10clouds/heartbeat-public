@@ -15,8 +15,8 @@
   ],
   "dependencies": {
     "socket.io-client": "~1.3.2",
-    "polymer": "~0.5.4",
     "weather-icons": "~1.3.2",
-    "Chart.js": "~1.0.1"
+    "Chart.js": "~1.0.1",
+    "polymer": "~1.0.7"
   }
 }

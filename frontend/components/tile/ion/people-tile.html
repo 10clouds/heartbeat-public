@@ -1,18 +1,18 @@
 <link rel="import" href="../tile.html">
 <link rel="import" href="../../socket-connection.html">
 
-<polymer-element name="hb-ion-people-tile">
+<dom-module id="hb-ion-people-tile">
+  <style>
+    :host hb-tile {
+      background: #44c644;
+    }
+
+    :host(:nth-child(even)) hb-tile {
+      background: #36bd36;
+    }
+  </style>
+
   <template>
-    <style>
-      hb-tile {
-        background: #44c644;
-      }
-
-      :host(:nth-child(even)) hb-tile {
-        background: #36bd36;
-      }
-    </style>
-
     <hb-tile id="tile" class="ion">
       <value>{{ usersCount }}</value>
       <header>people</header>
@@ -21,12 +21,14 @@
     </hb-tile>
 
     <socket-connection endpoint="ion"
-                       on-data="{{onData}}">
+                       on-data="onData">
     </socket-connection>
 
   </template>
+
   <script>
     Polymer({
+      is: 'hb-ion-people-tile',
       usersCount: 0,
       onData: function (ev, data) {
         this.usersCount = data.users;
@@ -34,4 +36,4 @@
       }
     });
   </script>
-</polymer-element>
+</dom-module>

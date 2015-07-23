@@ -1,7 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="socket-connection"
-                 attributes="endpoint">
+<dom-module id="socket-connection">
   <script>
   (function () {
     var protocol = window.location.protocol;
@@ -11,7 +10,7 @@
     var RESTART_DELAY_MS = 30 * 1000;
 
     var socket = io.connect(socketUrl);
-    window.addEventListener('polymer-ready', function () {
+    window.addEventListener('WebComponentsReady', function () {
       socket.emit('established');
     });
     socket.on('connect', function () {
@@ -24,7 +23,12 @@
     });
 
     Polymer({
+      is: 'socket-connection',
+      properties: {
+        endpoint: String,
+      },
       ready: function () {
+        console.log(this.endpoint);
         if (this.endpoint) {
           var self = this;
           socket.on(this.endpoint, function (data) {
@@ -36,4 +40,4 @@
 
   })();
   </script>
-</polymer-element>
+</dom-module>

@@ -1,18 +1,17 @@
 <link rel="import" href="../tile.html">
 <link rel="import" href="../../socket-connection.html">
 
-<polymer-element name="hb-slack-users-tile">
+<dom-module id="hb-slack-users-tile">
+  <style>
+    :host hb-tile {
+      background: rgb(64, 224, 208);
+    }
+
+    :host(:nth-child(even)) hb-tile {
+      background: rgb(50, 186, 180);
+    }
+  </style>
   <template>
-    <style>
-      hb-tile {
-        background: rgb(64, 224, 208);
-      }
-
-      :host(:nth-child(even)) hb-tile {
-        background: rgb(50, 186, 180);
-      }
-    </style>
-
     <hb-tile id="tile">
       <value>{{ usersCount }}</value>
       <header>online</header>
@@ -21,12 +20,13 @@
     </hb-tile>
 
     <socket-connection endpoint="slack"
-                       on-data="{{onData}}">
+                       on-data="onData">
     </socket-connection>
 
   </template>
   <script>
     Polymer({
+      is: 'hb-slack-users-tile',
       usersCount: 0,
       onData: function (ev, data) {
         this.usersCount = data.uniqueUsers;
@@ -34,4 +34,4 @@
       }
     });
   </script>
-</polymer-element>
+</dom-module>

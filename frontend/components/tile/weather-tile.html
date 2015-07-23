@@ -14,7 +14,7 @@
     font-style: normal;
   }
 </style>
-<polymer-element name="hb-weather-tile">
+<dom-module id="hb-weather-tile">
   <template>
     <link rel="stylesheet"
           href="../../bower_components/weather-icons/css/weather-icons.css">
@@ -52,7 +52,7 @@
     </hb-tile>
 
     <socket-connection endpoint="weather"
-                       on-data="{{onData}}">
+                       on-data="onData">
     </socket-connection>
 
   </template>
@@ -81,6 +81,7 @@
       };
 
       return Polymer({
+        is: 'hb-weather-tile',
         temp: '0',
         desc: 'loading',
         iconClass: 'wi wi-day-sunny',
@@ -93,4 +94,4 @@
       });
     })();
   </script>
-</polymer-element>
+</dom-module>

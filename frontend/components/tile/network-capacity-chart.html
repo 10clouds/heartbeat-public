@@ -1,37 +1,38 @@
 <link rel="import" href="../base.html">
 <link rel="import" href="../socket-connection.html">
 
-<polymer-element name="hb-network-capacity-chart">
+<dom-module id="hb-network-capacity-chart">
+  <style>
+    :host {
+      height: 237px;
+      background: #BC7DE0;
+      -webkit-transition: -webkit-transform 500ms;
+      -moz-transition: -moz-transform 500ms;
+      -ms-transition: -ms-transform 500ms;
+      -o-transition: -o-transform 500ms;
+      transition: transform 500ms;
+    }
+    :host(.beat) {
+      -webkit-transform: scale(1.05,1.05);
+      -moz-transform: scale(1.05,1.05);
+      -ms-transform: scale(1.05,1.05);
+      -o-transform: scale(1.05,1.05);
+      transform: scale(1.05,1.05);
+    }
+    :host canvas {
+      margin-top: 1%;
+      margin-left: 1.5%;
+    }
+  </style>
   <template>
-    <style>
-      :host{
-        height: 237px;
-        background: #BC7DE0;
-        -webkit-transition: -webkit-transform 500ms;
-        -moz-transition: -moz-transform 500ms;
-        -ms-transition: -ms-transform 500ms;
-        -o-transition: -o-transform 500ms;
-        transition: transform 500ms;
-      }
-      :host(.beat) {
-        -webkit-transform: scale(1.05,1.05);
-        -moz-transform: scale(1.05,1.05);
-        -ms-transform: scale(1.05,1.05);
-        -o-transform: scale(1.05,1.05);
-        transform: scale(1.05,1.05);
-      }
-      :host canvas {
-        margin-top: 1%;
-        margin-left: 1.5%;
-      }
-    </style>
     <canvas id="myChart" height="243" width="100"></canvas>
     <socket-connection endpoint="network"
-                       on-data="{{onData}}">
+                       on-data="onData">
     </socket-connection>
   </template>
   <script>
     Polymer({
+      is: 'hb-network-capacity-chart',
       prevData: 100,
       maxCap: 0,
       maxCharPoints: 0,
@@ -80,9 +81,11 @@
         this.capacityChart.update();
       },
       ready: function () {
-        this.$.myChart.width = this.clientWidth * 0.96;
-        this.$.myChart.height = document.querySelector('.app-logo').clientHeight * 0.96;
-        var ctx = this.$.myChart.getContext('2d');
+        var $chart = this.$.myChart;
+
+        $chart.width = this.clientWidth * 0.96;
+        $chart.height = document.querySelector('.app-logo').clientHeight * 0.96;
+        var ctx = $chart.getContext('2d');
         this.capacityChart = new Chart(ctx).Line(this.chart, {
           // Boolean - Whether to animate the chart
           animation: false,
@@ -115,9 +118,9 @@
           // Number - Scale label font size in pixels
           scaleFontSize: 11,
         });
-        this.$.myChart.style.width = this.clientWidth * 0.96 + 'px';
-        this.$.myChart.style.height = document.querySelector('.app-logo').clientHeight * 0.96 + 'px';
+        $chart.style.width = this.clientWidth * 0.96 + 'px';
+        $chart.style.height = document.querySelector('.app-logo').clientHeight * 0.96 + 'px';
       }
     })
   </script>
-</polymer-element>
+</dom-module>
