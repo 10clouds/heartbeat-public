@@ -31,11 +31,11 @@
     <hb-tile id="tile">
       <value>{{ status }}</value>
       <header>
-        <template if="{{!until}}">
+        <template is="dom-if" if="{{!until}}">
           <!-- <a target="_blank" href="{{ serverAddr }}">Click to reserve</a> -->
           <span>&nbsp;</span>
         </template>
-        <template if="{{until}}">
+        <template is="dom-if" if="{{until}}">
           <span>{{ until }}</span>
         </template>
       </header>

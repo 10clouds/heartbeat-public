@@ -1,49 +1,38 @@
 <link rel="import" href="tile.html">
 <link rel="import" href="../socket-connection.html">
 
-<style>
-  /* Fix @font-face not working in shadow DOM */
-  @font-face {
-    font-family: 'weathericons';
-    src: url('../../bower_components/weather-icons/font/weathericons-regular-webfont.eot');
-    src: url('../../bower_components/weather-icons/font/weathericons-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../bower_components/weather-icons/font/weathericons-regular-webfont.woff') format('woff'),
-         url('../../bower_components/weather-icons/font/weathericons-regular-webfont.ttf') format('truetype'),
-         url('../../bower_components/weather-icons/font/weathericons-regular-webfont.svg#weathericons-regular-webfontRg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-  }
-</style>
 <dom-module id="hb-weather-tile">
+  <link rel="stylesheet"
+        href="../../bower_components/weather-icons/css/weather-icons.css">
+  <style>
+    hb-tile {
+      background: #5175FF;
+    }
+
+    .weather-value {
+      box-sizing: border-box;
+      margin-top: -29px;
+    }
+
+    .weather-icon {
+      font-size: 68px;
+      height: 68px;
+    }
+
+    .weather-temperature {
+      font-size: 24px;
+    }
+  </style>
   <template>
-    <link rel="stylesheet"
-          href="../../bower_components/weather-icons/css/weather-icons.css">
-
-    <style>
-      hb-tile {
-        background: #5175FF;
-      }
-
-      .weather-value {
-        box-sizing: border-box;
-        margin-top: -29px;
-      }
-
-      .weather-icon {
-        font-size: 68px;
-        height: 68px;
-      }
-
-      .weather-temperature {
-        font-size: 24px;
-      }
-    </style>
 
     <hb-tile id="tile">
       <value>
         <div class="weather-value">
-          <i class="weather-icon {{ iconClass }}" title="{{ desc }}"></i>
-          <div class="weather-temperature">{{ temp }}&#8451;</div>
+          <i class$="{{ iconClass }}" title$="{{ desc }}"></i>
+          <div class="weather-temperature">
+            <span>{{ temp }}</span>
+            &#8451;
+          </div>
         </div>
       </value>
       <header>{{ desc }}</header>
@@ -60,33 +49,33 @@
     (function() {
 
       var iconsMap = {
-        '01d': 'wi wi-day-sunny',
-        '01n': 'wi wi-night-clear',
-        '02d': 'wi wi-day-sunny-overcast',
-        '02n': 'wi wi-night-partly-cloudy',
-        '03d': 'wi wi-day-cloudy',
-        '03n': 'wi wi-night-cloudy',
-        '04d': 'wi wi-cloudy',
-        '04n': 'wi wi-cloudy',
-        '09d': 'wi wi-day-showers',
-        '09n': 'wi wi-night-showers',
-        '10d': 'wi wi-day-rain',
-        '10n': 'wi wi-night-rain',
-        '11d': 'wi wi-day-thunderstorm',
-        '11n': 'wi wi-night-thunderstorm',
-        '13d': 'wi wi-day-snow',
-        '13n': 'wi wi-night-snow',
-        '50d': 'wi wi-day-fog',
-        '50n': 'wi wi-night-fog',
+        '01d': 'wi-day-sunny',
+        '01n': 'wi-night-clear',
+        '02d': 'wi-day-sunny-overcast',
+        '02n': 'wi-night-partly-cloudy',
+        '03d': 'wi-day-cloudy',
+        '03n': 'wi-night-cloudy',
+        '04d': 'wi-cloudy',
+        '04n': 'wi-cloudy',
+        '09d': 'wi-day-showers',
+        '09n': 'wi-night-showers',
+        '10d': 'wi-day-rain',
+        '10n': 'wi-night-rain',
+        '11d': 'wi-day-thunderstorm',
+        '11n': 'wi-night-thunderstorm',
+        '13d': 'wi-day-snow',
+        '13n': 'wi-night-snow',
+        '50d': 'wi-day-fog',
+        '50n': 'wi-night-fog',
       };
 
-      return Polymer({
+      Polymer({
         is: 'hb-weather-tile',
         temp: '0',
         desc: 'loading',
         iconClass: 'wi wi-day-sunny',
         onData: function (ev, data) {
-          this.iconClass = iconsMap[data.icon];
+          this.iconClass = 'weather-icon wi ' + iconsMap[data.icon];
           this.temp = (data.temp - 273.15).toFixed(0);
           this.desc = data.desc;
           this.$.tile.ping();
