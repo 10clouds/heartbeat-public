@@ -73,29 +73,42 @@
           el.classList.remove('beat');
         }, 250);
       },
-      autosizeFont: function (value) {
+      autosizeFont: function (text) {
         var maxFontSize = 73;
         var valueEl = Polymer.dom(this).querySelector('value');
 
         // measure text at maxFontSize
-        var measureEl = document.createElement('span');
-        measureEl.style.visibility = 'hidden';
-        measureEl.style.fontSize = maxFontSize + 'px';
-        measureEl.style.whiteSpace = 'nowrap';
-        measureEl.style.padding = 0;
-        measureEl.style.margin = 0;
-        measureEl.innerHTML = value;
+        var measureEl = prepareMeasureElement(text, maxFontSize);
 
         Polymer.dom(this.root).appendChild(measureEl);
-        var valueWidth = measureEl.offsetWidth;
+        var textWidth = measureEl.offsetWidth;
         Polymer.dom(this.root).removeChild(measureEl);
 
         // calculate the font size, so it fits the tile
-        var fontScale = Math.min(this.offsetWidth / valueWidth, 1);
+        var fontScale = Math.min(this.offsetWidth / textWidth, 1);
         var fontSize = Math.floor(fontScale * maxFontSize) - 6;
 
         valueEl.style.fontSize = fontSize + 'px';
         valueEl.style.lineHeight = (maxFontSize - 6)/ fontSize;
+
+        function prepareMeasureElement(text, maxFontSize) {
+          var measureEl = document.createElement('span');
+
+          var styling = {
+            visibility: 'hidden',
+            fontSize: maxFontSize + 'px',
+            whiteSpace: 'nowrap',
+            padding: 0,
+            margin: 0,
+          };
+          for (var prop in styling) {
+            measureEl.style[prop] = styling[prop];
+          }
+
+          measureEl.innerHTML = text;
+
+          return measureEl;
+        }
       }
     });
   </script>
