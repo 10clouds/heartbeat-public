@@ -1,0 +1,39 @@
+<link rel="import" href="base.html">
+
+<dom-module id="hb-switcher-tile">
+
+  <template>
+    <div class="switcher">
+      <content></content>
+    </div>
+  </template>
+
+  <script>
+
+    Polymer({
+      is: 'hb-switcher-tile',
+      properties: {
+          'tileDuration': {
+              type: Number,
+              value: 2500
+          },
+      },
+      attached: function () {
+            var currentTileIdx = 0;
+            var switcherTiles = Polymer.dom(this).querySelectorAll('.tile');
+
+            function showOneTile () {
+                switcherTiles.forEach(function (el, idx) {
+                    el.style.display = (idx === currentTileIdx) ? 'block' : 'none';})
+            }
+
+            showOneTile();
+
+            setInterval(function () {
+                currentTileIdx = (currentTileIdx + 1) % switcherTiles.length;
+                showOneTile();
+            }, this.tileDuration);
+      }
+    });
+  </script>
+</dom-module>
