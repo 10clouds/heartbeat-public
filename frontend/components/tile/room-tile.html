@@ -51,16 +51,13 @@
     Polymer({
       is: 'hb-room-tile',
       properties: {
-        'room-name': String
+        'roomName': String
       },
       status: 'Free',
       until: false,
       // serverAddr: null,
-      ready: function () {
-        this.roomName = this['room-name'];
-      },
       onData: function (ev, data) {
-        var key = this['room-name'] + 'Room';
+        var key = this['roomName'] + 'Room';
         var val = data[key];
         var now = new Date();
 
