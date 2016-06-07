@@ -9,7 +9,7 @@ module.exports = exports = {
     uniqueId: 'slack',
     options: {},
     httpRoute: '/slack/all',
-    refetchInterval: 1000 * 118,
+    refetchInterval: 1000 * 60 * 5,
     fetchData: co(fetchData)
 };
 
