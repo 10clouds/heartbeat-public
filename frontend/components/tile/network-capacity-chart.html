@@ -4,7 +4,7 @@
 <dom-module id="hb-network-capacity-chart">
   <style>
     :host {
-      height: 237px;
+      height: 243px;
       background: #BC7DE0;
       -webkit-transition: -webkit-transform 500ms;
       -moz-transition: -moz-transform 500ms;
@@ -20,12 +20,26 @@
       transform: scale(1.05,1.05);
     }
     :host canvas {
-      margin-top: 1%;
-      margin-left: 1.5%;
+      position: absolute;
+      top: 0;
+    }
+    :host hb-tile {
+      background: transparent;
+    }
+    :host hb-tile value {
+      color: white;
+      font-size: 25px;
+      letter-spacing: 5px;
     }
   </style>
   <template>
     <canvas id="myChart" height="243" width="100"></canvas>
+    <hb-tile id="tile">
+      <value>Network Cap</value>
+      <header><span>&nbsp;</span></header>
+      <description>&nbsp;</description>
+      <endpoint></endpoint>
+    </hb-tile>
     <socket-connection endpoint="network"
                        on-data="onData">
     </socket-connection>
@@ -68,17 +82,26 @@
       },
       onData: function (data) {
         var bytesArr = data.detail.usageHistory;
-        for (var point in bytesArr) {
-          this.capacityChart.addData(
-            [bytesArr[point].bytes],
-            this.formatDate(new Date(bytesArr[point].time))
-          );
+
+        var chart = this.smootheChartFactory({
+          maxCharPoints: data.detail.maxCharPoints,
+        });
+        var series = chart.seriesSet[0].timeSeries;
+
+        if (this.dataInitialized) {
+          extendMainSeries(bytesArr.pop());
+        } else {
+          bytesArr.forEach(function (byteData) {
+            extendMainSeries(byteData);
+          });
         }
-        while (this.capacityChart.datasets[0].points.length > data.detail.maxCharPoints) {
-          this.capacityChart.removeData();
+
+        function extendMainSeries(byteData) {
+          series.append(new Date(byteData.time), byteData.bytes);
         }
+
+        this.dataInitialized = true;
         this.ping();
-        this.capacityChart.update();
       },
       ready: function () {
         var $chart = this.$.myChart;
@@ -89,47 +112,48 @@
         window.addEventListener('WebComponentsReady', onComponentsReady);
 
         function onComponentsReady() {
-          $chart.width = component.clientWidth * 0.96;
-          $chart.height = document.querySelector('.app-logo').clientHeight * 0.96;
-
-          var ctx = $chart.getContext('2d');
-          component.capacityChart = new Chart(ctx).Line(component.chart, {
-            // Boolean - Whether to animate the chart
-            animation: false,
-            // Boolean - If we want to override with a hard coded scale
-            scaleOverride: true,
-            // Number - The number of steps in a hard coded scale
-            scaleSteps: 10,
-            // Number - The value jump in the hard coded scale
-            scaleStepWidth: 10,
-            // Number - The scale starting value
-            scaleStartValue: 0,
-            // Boolean - whether or not the chart should be responsive and resize when the browser does.
-            responsive: false,
-            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-            maintainAspectRatio: false,
-            // Boolean - Determines whether to draw tooltips on the canvas or not
-            showTooltips: false,
-            // Boolean - Whether to show a dot for each point
-            pointDot : true,
-            // Number - Radius of each point dot in pixels
-            pointDotRadius : 2,
-            // Number - Pixel width of point dot stroke
-            pointDotStrokeWidth : 1,
-            // Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-            pointHitDetectionRadius : 0,
-            // String - Colour of the grid lines
-            scaleGridLineColor : 'rgba(255,255,255,.1)',
-            // String - Scale label font colour
-            scaleFontColor: 'rgba(255,255,255,.5)',
-            // Number - Scale label font size in pixels
-            scaleFontSize: 11,
+          $chart.width  = component.clientWidth;
+          $chart.height = document.querySelector('.app-logo').clientHeight;
+          $chart.style.width = component.clientWidth  + 'px';
+          $chart.style.height = document.querySelector('.app-logo').clientHeight + 'px';
+        }
+      },
+      smootheChartFactory: function (options) {
+        if (!this._chart) {
+          var msPerPixel = (1000 * 60 * (options.maxCharPoints - 1)) / this.$.myChart.width;
+          var chart = new SmoothieChart({
+            millisPerPixel: msPerPixel,
+            labels:{
+              precision: 0,
+              fontSize: 14,
+            },
+            grid: {
+              strokeStyle: '#555555',
+              lineWidth: 1,
+              millisPerLine: 60000,
+              verticalSections: 6
+            },
+            timestampFormatter: function (date) {
+              if (date.getMinutes() % 2 === 1) {
+                return '';
+              }
+              return date.toISOString().slice(11, 16);
+            },
+            maxValue:100,
+            minValue:0
           });
 
-          $chart.style.width = component.clientWidth * 0.96 + 'px';
-          $chart.style.height = document.querySelector('.app-logo').clientHeight * 0.96 + 'px';
+          chart.addTimeSeries(new TimeSeries(), {
+            strokeStyle: 'rgba(0, 255, 0, 1)',
+            fillStyle: 'rgba(0, 255, 0, 0.2)',
+            lineWidth: 4,
+          });
+
+          chart.streamTo(this.$.myChart, 60000);
+          this._chart = chart;
         }
-      }
+        return this._chart;
+      },
     });
   </script>
 </dom-module>
