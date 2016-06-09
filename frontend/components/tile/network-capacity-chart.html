@@ -83,7 +83,7 @@
       onData: function (data) {
         var bytesArr = data.detail.usageHistory;
 
-        var chart = this.smootheChartFactory({
+        var chart = this.smoothieChartFactory({
           maxCharPoints: data.detail.maxCharPoints,
         });
         var series = chart.seriesSet[0].timeSeries;
@@ -118,7 +118,7 @@
           $chart.style.height = document.querySelector('.app-logo').clientHeight + 'px';
         }
       },
-      smootheChartFactory: function (options) {
+      smoothieChartFactory: function (options) {
         if (!this._chart) {
           var msPerPixel = (1000 * 60 * (options.maxCharPoints - 1)) / this.$.myChart.width;
           var chart = new SmoothieChart({
@@ -137,7 +137,7 @@
               if (date.getMinutes() % 2 === 1) {
                 return '';
               }
-              return date.toISOString().slice(11, 16);
+              return date.getHours() + ':' + date.getMinutes();
             },
             maxValue:100,
             minValue:0
