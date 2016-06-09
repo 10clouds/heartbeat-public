@@ -26,7 +26,7 @@ var cache  = require('./utils/cache');
 
 var SupportedPlugins = [
     require('./plugins/ion'),
-    require('./plugins/rooms'),
+    // require('./plugins/rooms'),
     require('./plugins/github'),
     // require('./plugins/hipchat'),
     require('./plugins/weather'),

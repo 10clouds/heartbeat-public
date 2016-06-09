@@ -27,7 +27,7 @@
       is: 'hb-slack-latest-gif-tile',
       onData: function (ev, data) {
         var backgroundImage = data.lastGif ?
-                              'url(' + data.lastGif + ')' :
+                              'url("' + encodeURI(data.lastGif) + '")' :
                               'none';
 
         this.$.tile.style.backgroundImage = backgroundImage;
