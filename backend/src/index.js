@@ -30,7 +30,7 @@ var SupportedPlugins = [
     require('./plugins/github'),
     // require('./plugins/hipchat'),
     require('./plugins/weather'),
-    require('./plugins/breaking'),
+    // require('./plugins/breaking'),
     require('./plugins/network'),
     require('./plugins/slack')
 ];
