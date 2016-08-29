@@ -137,7 +137,9 @@
               if (date.getMinutes() % 2 === 1) {
                 return '';
               }
-              return date.getHours() + ':' + date.getMinutes();
+              const minutes   = date.getMinutes();
+              const hours = date.getHours();
+              return (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
             },
             maxValue:100,
             minValue:0
