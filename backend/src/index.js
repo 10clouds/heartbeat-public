@@ -6,7 +6,7 @@ try {
     if (err.code === 'MODULE_NOT_FOUND') {
         console.log(
             'You need define local config (`local.config.js`) ' +
-            'between running this app.'
+            'before running this app.'
         );
         return;
     } else {
