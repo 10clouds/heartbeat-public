@@ -32,7 +32,7 @@ function* fetchData() {
     var response = params[0];
 
     if (response.statusCode !== 200) {
-        logger.warn('Failed fetching ion data');
+        logger.warn('Failed fetching ion data', response.statusCode, response.body);
         return {users: 0, homeoffice: 0};
     }
 
