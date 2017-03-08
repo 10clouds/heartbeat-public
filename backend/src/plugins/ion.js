@@ -19,6 +19,7 @@ function* fetchData() {
     var homeOfficeCnt = 0;
     var usersCnt = 0;
     var reqOptions = {
+        rejectUnauthorized: false,
         url: this.options.serverUrl + '/api/events/availability/' +
              '?on=' + date +
              '&format=json' +
