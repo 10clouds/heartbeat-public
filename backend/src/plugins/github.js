@@ -126,7 +126,10 @@ function githubRequest(path, qs) {
 
     var config = {
         url: exports.options.serverUrl + path,
-        headers: {'User-Agent': 'Heartbeat'},
+        headers: {
+            'User-Agent': 'Heartbeat',
+            Accept: 'application/vnd.github.v3+json',
+        },
         qs: qs,
         json: true
     };
@@ -160,15 +163,15 @@ function githubRequestAllPages(path, qs, shouldStop) {
         });
 
         return githubRequest(path, pageQuery)
-        .then(function(response) {
-            items.push.apply(items, response.body);
+            .then(function(response) {
+                items.push.apply(items, response.body);
 
-            var hasNext = response.headers.link &&
-                          response.headers.link.indexOf('rel="next"') >= 0;
+                var hasNext = response.headers.link &&
+                              response.headers.link.indexOf('rel="next"') >= 0;
 
-            var done = !hasNext || (shouldStop && shouldStop(response.body));
-            return done ? items : getRest(page + 1);
-        });
+                var done = !hasNext || (shouldStop && shouldStop(response.body));
+                return done ? items : getRest(page + 1);
+            });
     }
 
     return getRest(1);
