@@ -7,13 +7,16 @@ module.exports = exports = {
         serverUrl: '',
     },
     httpRoute: '/weather/all',
-    refetchInterval: 1000 * 5 * 56,
+    refetchInterval: 1000 * 15 * 56,
     fetchData: co(fetchData)
 };
 
 function* fetchData() {
     var params = yield request(this.options.serverUrl);
     var body = params[1];
+    if (params[0].statusCode >= 300) {
+        console.warn(body);
+    }
 
     var data = JSON.parse(body);
 

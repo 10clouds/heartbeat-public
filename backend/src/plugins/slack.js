@@ -68,7 +68,6 @@ Slack.prototype = _.create(SlackNode.prototype, {
             .flatten().uniq()
             .value();
         var isInSupportedChannels = _.partial(_.includes, idsInSupportedChannels);
-
         return _(fullInfo.users)
             .filter('presence', 'active')
             .pluck('id')

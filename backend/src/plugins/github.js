@@ -129,6 +129,7 @@ function githubRequest(path, qs) {
         headers: {
             'User-Agent': 'Heartbeat',
             Accept: 'application/vnd.github.v3+json',
+            Authorization: exports.options.authorizationToken
         },
         qs: qs,
         json: true
@@ -142,6 +143,8 @@ function githubRequest(path, qs) {
         }
 
         var error = new Error(
+            path +
+            ': ' +
             http.STATUS_CODES[response.statusCode] +
             ': ' +
             JSON.stringify(response.body)

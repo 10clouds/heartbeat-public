@@ -19,6 +19,7 @@ module.exports = exports = {
             serverUrl: '',
             user: '',
             org: '',
+            authorizationToken: 'Token 2d77860e636c46d5d9cd6720437a4989d60d9a5a'
         },
         slack: {
             token: '',
@@ -30,7 +31,7 @@ module.exports = exports = {
             sourceFilePath: ''
         },
         weather: {
-            serverUrl: 'http://188.226.224.148/data/2.5/weather?q=Warsaw,pl',
+            serverUrl: 'https://api.openweathermap.org/data/2.5/weather?q=City,Country&APPID=???',
         },
     }
 };
