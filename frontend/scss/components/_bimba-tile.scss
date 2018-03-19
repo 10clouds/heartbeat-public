@@ -1,0 +1,61 @@
+
+.hb-bimba-tile {
+
+  .bimba-items {
+    margin-bottom: 1vw;
+
+    h2 {
+      margin: 0 0 -10px;
+    }
+
+    &:first-of-type {
+      h2 {
+        margin: 0;
+      }
+    }
+
+    &__icons {
+      display: flex;
+      justify-content: flex-end;
+      height: auto;
+      min-height: 0;
+      padding: 0 10px;
+      font-size: 12px;
+      text-align: right;
+    }
+
+    &__icon {
+      width: 20%;
+
+      img {
+        display: block;
+        margin: 0 auto 5px;
+        width: auto;
+        height: 27px;
+      }
+    }
+  }
+
+  .bimba-item {
+    display: flex;
+    padding: 0 10px;
+
+    span {
+      &:nth-child(1) {
+        width: 5%;
+      }
+
+      &:nth-child(2) {
+        width: 55%;
+      }
+
+      &:nth-child(3) {
+        width: 20%;
+      }
+
+      &:nth-child(4) {
+        width: 20%;
+      }
+    }
+  }
+}

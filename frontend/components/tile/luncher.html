@@ -1,0 +1,71 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<dom-module id="hb-luncher-tile">
+
+  <template>
+    <hb-tile id="tile">
+      <value>
+        <template is="dom-repeat" items="{{lunches}}" indexAs="index">
+          <div class="luncher-item fade" style$="{{ itemStyle(index) }}">
+            <div class="luncher-item__content">
+              <h2>{{item.restaurant.name}}</h2>
+              <p>{{item.message}}</p>
+              </a>
+            </div>
+          </div>
+        </template>
+
+        <template is="dom-if" if="{{!lunches.length}}">
+          <div class="luncher-noitem">
+            <h2>Waiting for lunches</h2>
+            <img src="./../../assets/food.svg" alt="">
+          </div>
+        </template>
+      </value>
+
+      <!--<description>LUNCHER</description>-->
+      <!--<endpoint>Food</endpoint>-->
+
+
+      <description>
+        <div class="hb-tile__footer">
+          <p class="hb-tile__footer-header">LUNCHER</p>
+          <p>Food</p>
+        </div>
+      </description>
+
+    </hb-tile>
+
+    <socket-connection endpoint="luncher" on-data="onData"></socket-connection>
+  </template>
+
+  <script>
+    var slideIndex = 0,
+      refreshed = false;
+
+    Polymer({
+      is: 'hb-luncher-tile',
+      lunches: [],
+      onData: function (ev, data) {
+        this.lunches = data.results;
+        this.$.tile.ping();
+
+        //Fired only once
+        if (refreshed === false) {
+          slider.showSlides("luncher-item", slideIndex, 10000);
+        }
+        refreshed = true;
+      },
+      itemStyle: function (index) {
+        if (index == 0) {
+          return 'display:block;'
+        }
+        return 'display:none';
+      }
+    });
+
+  </script>
+</dom-module>
+
+

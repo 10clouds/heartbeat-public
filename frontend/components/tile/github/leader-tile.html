@@ -2,21 +2,18 @@
 <link rel="import" href="../../socket-connection.html">
 
 <dom-module id="hb-github-leader-tile">
-  <style>
-    :host hb-tile {
-      background: #fad733;
-    }
 
-    :host(:nth-child(even)) hb-tile {
-      background: #eed329;
-    }
-  </style>
   <template>
     <hb-tile id="tile" class="github">
-      <value>{{ leader }}</value>
-      <header>commit master</header>
-      <description>today</description>
-      <endpoint>Github</endpoint>
+      <value class="github__leader">{{ leader }}</value>
+
+      <description>
+        <div class="hb-tile__footer">
+          <p>today</p>
+          <p class="hb-tile__footer-header">commit master</p>
+          <p>Github</p>
+        </div>
+      </description>
     </hb-tile>
 
     <socket-connection endpoint="github"

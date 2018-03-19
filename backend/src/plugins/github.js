@@ -32,7 +32,7 @@ function* fetchData() {
     // we must get all repositories and sort them locally - cauze
     // stupid github api have sort flag support only for fetching repos
     // per user - and have not per orgs
-    logger.info('Github: looking for active repositories.');
+    //logger.info('Github: looking for active repositories.');
     var repos = yield githubRequestAllPages('/orgs/%org/repos', {type:'all'});
 
     var activeRepos = repos.filter(function(repo) {
@@ -45,7 +45,7 @@ function* fetchData() {
     });
 
     var pullsPromises = activeRepos.map(function(repo) {
-        logger.info('Github: Fetching "%s" pull requests.', repo.name);
+        //logger.info('Github: Fetching "%s" pull requests.', repo.name);
         return githubRequestAllPages('/repos/%org/' + repo.name + '/pulls');
     });
 
@@ -101,9 +101,9 @@ function* fetchData() {
 
     stats.todayCommitsCount = totalCommits;
     stats.topCommiter = topCommiter.login;
-    logger.info('Fetched', totalCommits, 'commits');
-    logger.info('Commit stats', commitStats);
-    logger.info('Top Committer', topCommiter);
+    //logger.info('Fetched', totalCommits, 'commits');
+    //logger.info('Commit stats', commitStats);
+    //logger.info('Top Committer', topCommiter);
 
     var results = yield Promise.settle(pullsPromises);
     results.forEach(function (result) {

@@ -1,0 +1,39 @@
+
+.hb-luncher-tile {
+  margin-top: 0;
+  text-decoration: none;
+  color: #fff;
+
+  p {
+    padding: 0 20px;
+  }
+}
+
+.luncher-noitem {
+  margin: 70px 0 30px;
+
+  img {
+    margin-top: 20px;
+    width: 100px;
+  }
+}
+
+.luncher-item {
+  position: relative;
+  height: 375px;
+  overflow: hidden;
+
+  &__content {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  p {
+    margin: 0;
+    max-height: 340px;
+    overflow: hidden;
+  }
+}

@@ -2,22 +2,23 @@
 <link rel="import" href="../../socket-connection.html">
 
 <dom-module id="hb-github-commits-tile">
-  <style>
-    :host hb-tile {
-      background: #fad733;
-    }
 
-    :host(:nth-child(even)) hb-tile {
-      background: #eed329;
-    }
-  </style>
   <template>
 
     <hb-tile id="tile">
-      <value>{{ commitsCount }}</value>
-      <header>commits</header>
-      <description>today</description>
-      <endpoint>Github</endpoint>
+      <value>
+        <img class="app-img-svg" src="../../../assets/love.svg" alt="">
+        <span>{{ commitsCount }}</span>
+      </value>
+
+      <description>
+        <div class="hb-tile__footer">
+          <p>today</p>
+          <p class="hb-tile__footer-header">commits</p>
+          <p>Github</p>
+        </div>
+      </description>
+
     </hb-tile>
 
     <socket-connection endpoint="github"
@@ -31,6 +32,7 @@
       commitsCount: 0,
       onData: function (ev, data) {
         this.commitsCount = data.commits;
+
         this.$.tile.ping();
       }
     });

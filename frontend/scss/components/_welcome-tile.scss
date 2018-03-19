@@ -1,0 +1,46 @@
+.app-logo {
+  background: #141833;
+  color: #fff;
+
+  header {
+    position: absolute;
+    top: auto;
+    bottom: 5%;
+    left: 0;
+    width: 100%;
+    font-size: 2.5vw;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &-value {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    font-size: 28px;
+
+    &--img{
+      &.hb-welcome-tile{
+        top: 0;
+        margin-top: 0;
+      }
+    }
+
+    img {
+      width: 90%;
+    }
+  }
+
+  &-city {
+    width: 100%;
+    margin: -10px 0 0;
+    font-size: 28px;
+    text-align: center;
+
+    @media #{$media-md-up} {
+      font-size: 1.7vw;
+    }
+  }
+}

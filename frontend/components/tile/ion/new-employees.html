@@ -1,0 +1,72 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<dom-module id="hb-ion-new-tile">
+  <template>
+    <hb-tile id="tile" class$="[[allPeopleBorderClass]]">
+      <value>
+        <div class="ion-new">
+          <template is="dom-repeat" items="{{newPeople}}" indexAs="index">
+
+            <div class="ion-new__item" style$="{{ itemStyle(index) }}">
+              <template is="dom-if" if="{{item.icon}}">
+                <img src="{{item.icon}}" alt="">
+              </template>
+              <template is="dom-if" if="{{!item.icon}}">
+                <img src="./../../../assets/user.svg" alt="">
+              </template>
+
+              <div class="ion-new__desc">
+                <p class="ion-new__name"><span>{{item.first_name}}</span> <span>{{item.last_name}}</span></p>
+                <p class="ion-new__role">{{item.role}}</p>
+              </div>
+
+            </div>
+          </template>
+        </div>
+      </value>
+
+      <!--<description>new people</description>-->
+      <!--<endpoint>ION</endpoint>-->
+
+
+      <description>
+        <div class="hb-tile__footer">
+          <p class="hb-tile__footer-header">new people</p>
+          <p>ION</p>
+        </div>
+      </description>
+    </hb-tile>
+
+    <socket-connection endpoint="ion-employees" on-data="onData">
+    </socket-connection>
+
+  </template>
+
+  <script>
+    var emplIndex = 0,
+      refreshedEmpl = false;
+
+    Polymer({
+      is: 'hb-ion-new-tile',
+      newPeople: 0,
+      onData: function (ev, data) {
+        this.newPeople = data;
+
+        //Fired only once
+        if (refreshedEmpl === false) {
+          slider.showSlides("ion-new__item", emplIndex, 8000);
+        }
+        refreshedEmpl = true;
+
+        this.$.tile.ping();
+      },
+      itemStyle: function (index) {
+        if (index == 0) {
+          return 'display:block;'
+        }
+        return 'display:none';
+      }
+    });
+  </script>
+</dom-module>

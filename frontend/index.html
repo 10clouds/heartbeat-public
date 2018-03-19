@@ -3,72 +3,69 @@
 <head>
   <meta charset="utf-8">
   <title>Heartbeat</title>
-  <link rel="stylesheet" type="text/css" href="styles/normalize.css" />
-  <link rel="stylesheet" type="text/css" href="styles/fonts.css" />
-  <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="styles/styles.min.css"/>
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
 <body>
-  <!-- <hb-breaking></hb-breaking> -->
+<div class="tiles-container">
   <hb-tiles-grid>
+
     <hb-welcome-tile class="tile app-logo"></hb-welcome-tile>
+    <hb-github-commits-tile class="tile"></hb-github-commits-tile>
+    <hb-weather-tile class="tile"></hb-weather-tile>
+    <hb-smog-tile class="tile tile--no-desc  tile--small-margin"></hb-smog-tile>
 
     <hb-ion-people-tile class="tile"></hb-ion-people-tile>
-    <hb-ion-homeoffice-tile class="tile"></hb-ion-homeoffice-tile>
-
     <hb-github-pr-tile class="tile"></hb-github-pr-tile>
-    <hb-github-commits-tile class="tile"></hb-github-commits-tile>
+    <hb-bicycles-tile class="tile tile--long tile--no-desc  tile--small-margin"></hb-bicycles-tile>
+
+    <hb-ion-homeoffice-tile class="tile"></hb-ion-homeoffice-tile>
     <hb-github-leader-tile class="tile"></hb-github-leader-tile>
-
-    <hb-slack-latest-gif-tile class="tile"></hb-slack-latest-gif-tile>
-
-<!--     <hb-room-tile class="tile" room-name="conference"></hb-room-tile>
-    <hb-room-tile class="tile" room-name="social"></hb-room-tile>
-    <hb-room-tile class="tile" room-name="hamakownia"></hb-room-tile> -->
-
-    <hb-slack-users-tile class="tile"></hb-slack-users-tile>
-    <hb-weather-tile class="tile"></hb-weather-tile>
-    <hb-network-capacity-chart class="tile large"></hb-network-capacity-chart>
-
-<!--     <hb-switcher-tile class="tile" tile-duration="2500">
-        <hb-ion-people-tile class="tile"></hb-ion-people-tile>
-        <hb-ion-homeoffice-tile class="tile"></hb-ion-homeoffice-tile>
-
-        <hb-github-pr-tile class="tile"></hb-github-pr-tile>
-        <hb-github-commits-tile class="tile"></hb-github-commits-tile>
-        <hb-github-leader-tile class="tile"></hb-github-leader-tile>
-
-        <hb-slack-latest-gif-tile class="tile"></hb-slack-latest-gif-tile>
-
-        <hb-slack-users-tile class="tile"></hb-slack-users-tile>
-        <hb-weather-tile class="tile"></hb-weather-tile>
-    </hb-switcher-tile> -->
+    <hb-ion-new-tile class="tile tile--no-desc  tile--small-margin tile--long"></hb-ion-new-tile>
 
   </hb-tiles-grid>
 
-  <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-  <script src="../bower_components/socket.io-client/socket.io.js"></script>
-  <script src="../bower_components/smoothie/smoothie.js"></script>
+  <div class="tiles-container__aside">
+    <hb-instagram-tile class="tile tile--no-desc tile--no-margin tile-xlarge"></hb-instagram-tile>
+    <hb-traffic-tile class="tile tile--no-desc  tile--no-margin tile-xlarge"></hb-traffic-tile>
+  </div>
 
-  <link rel="import" href="../components/base.html">
-  <link rel="import" href="../components/socket-connection.html">
-  <!-- <link rel="import" href="../components/breaking/breaking.html"> -->
-  <link rel="import" href="../components/tiles-grid/tiles-grid.html">
-  <link rel="import" href="../components/tile/tile.html">
-  <link rel="import" href="../components/tile/welcome-tile.html">
-  <link rel="import" href="../components/tile/ion/people-tile.html">
-  <link rel="import" href="../components/tile/ion/homeoffice-tile.html">
-  <link rel="import" href="../components/tile/github/pr-tile.html">
-  <link rel="import" href="../components/tile/github/commits-tile.html">
-  <link rel="import" href="../components/tile/github/leader-tile.html">
-  <link rel="import" href="../components/tile/room-tile.html">
-  <link rel="import" href="../components/tile/weather-tile.html">
-  <link rel="import" href="../components/tile/network-capacity-chart.html">
-  <link rel="import" href="../components/tile/slack/users-tile.html">
-  <link rel="import" href="../components/tile/slack/latest-gif-tile.html">
-  <link rel="import" href="../components/switcher.html">
+</div>
+
+<script src="https://unpkg.com/webcomponentsjs@1.0.2/lite"></script>
+<script src="https://unpkg.com/socket.io-client@1.3.2/socket.io.js"></script>
+<script src="https://unpkg.com/smoothie@1.27.0/smoothie.js"></script>
+<script src="scripts/slider.js"></script>
+
+<link rel="import" href="../components/base.html">
+<link rel="import" href="../components/socket-connection.html">
+<link rel="import" href="../components/tiles-grid/tiles-grid.html">
+<link rel="import" href="../components/tile/tile.html">
+<link rel="import" href="../components/tile/welcome-tile.html">
+<link rel="import" href="../components/tile/ion/new-employees.html">
+<link rel="import" href="../components/tile/ion/people-tile.html">
+<link rel="import" href="../components/tile/ion/homeoffice-tile.html">
+<link rel="import" href="../components/tile/github/pr-tile.html">
+<link rel="import" href="../components/tile/github/commits-tile.html">
+<link rel="import" href="../components/tile/github/leader-tile.html">
+<link rel="import" href="../components/tile/weather-tile.html">
+<link rel="import" href="../components/tile/luncher.html">
+<link rel="import" href="../components/tile/smog.html">
+<link rel="import" href="../components/tile/bimba/bimba.html">
+<link rel="import" href="../components/tile/bimba/bimba-wroclawska.html">
+<link rel="import" href="../components/tile/bimba/bimba-wroclawska-2.html">
+<link rel="import" href="../components/tile/bimba/bimba-awf.html">
+<link rel="import" href="../components/tile/bicycles.html">
+<link rel="import" href="../components/tile/googlemaps.html">
+<!--<link rel="import" href="../components/tile/facebook.html">-->
+<link rel="import" href="../components/tile/instagram.html">
+<link rel="import" href="../components/tile/github/commits-tile.html">
+<link rel="import" href="../components/tile/github/pr-tile.html">
+<link rel="import" href="../components/switcher.html">
+
 </body>
 </html>

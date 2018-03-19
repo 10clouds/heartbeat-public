@@ -1,0 +1,18 @@
+/* Media queries
+-------------------------------------------------------------- */
+$screen: "only screen";
+
+$media-lg-xl : "#{$screen} and (min-width:#{$screen-lg-xl})";
+$media-lg : "#{$screen} and (min-width:#{$screen-lg})";
+
+$media-md-up : "#{$screen} and (min-width:#{$screen-md})";
+$media-md : "#{$screen} and (min-width:#{$screen-md}) and (max-width:#{$screen-md-max})";
+$media-to-md : "#{$screen} and (max-width:#{$screen-md-max})";
+
+$media-sm-up : "#{$screen} and (min-width:#{$screen-sm})";
+$media-sm : "#{$screen} and (min-width:#{$screen-sm}) and (max-width:#{$screen-sm-max})";
+$media-to-sm : "#{$screen} and (max-width:#{$screen-sm-max})";
+
+$media-xs-up : "#{$screen} and (min-width:#{$screen-xs})";
+$media-xs : "#{$screen} and (max-width:#{$screen-xs-max})";
+$media-xs-small : "#{$screen} and (max-width:#{$screen-xs})";

@@ -3,26 +3,7 @@
 
 <dom-module id="hb-weather-tile">
   <link rel="stylesheet"
-        href="../../bower_components/weather-icons/css/weather-icons.css">
-  <style>
-    hb-tile {
-      background: #5175FF;
-    }
-
-    .weather-value {
-      box-sizing: border-box;
-      margin-top: -29px;
-    }
-
-    .weather-icon {
-      font-size: 68px;
-      height: 68px;
-    }
-
-    .weather-temperature {
-      font-size: 24px;
-    }
-  </style>
+        href="https://unpkg.com/weather-icons@1.3.2/css/weather-icons.css">
   <template>
 
     <hb-tile id="tile">
@@ -30,14 +11,23 @@
         <div class="weather-value">
           <i class$="{{ iconClass }}" title$="{{ desc }}"></i>
           <div class="weather-temperature">
-            <span>{{ temp }}</span>
-            &#8451;
+            <span>{{ temp }}</span>ᵒc
           </div>
         </div>
       </value>
-      <header>{{ desc }}</header>
-      <description>Warsaw PL</description>
-      <endpoint>Weather</endpoint>
+
+      <!--<header>{{ desc }}</header>-->
+      <!--<description>Poznan PL</description>-->
+      <!--<endpoint>Weather</endpoint>-->
+
+      <description>
+        <div class="hb-tile__footer">
+          <p>{{ desc }}</p>
+          <p class="hb-tile__footer-header">Warsaw PL</p>
+          <p>Weather</p>
+        </div>
+      </description>
+
     </hb-tile>
 
     <socket-connection endpoint="weather"
@@ -77,6 +67,8 @@
         onData: function (ev, data) {
           this.iconClass = 'weather-icon wi ' + iconsMap[data.icon];
           this.temp = (data.temp - 273.15).toFixed(0);
+          this.temp = (this.temp == -0 ? 0 : this.temp);
+
           this.desc = data.desc;
           this.$.tile.ping();
         }

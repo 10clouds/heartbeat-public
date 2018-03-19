@@ -1,0 +1,14 @@
+
+.bicycles-item{
+  margin-bottom:20px;
+
+  & &__name{
+    margin-bottom: 5px;
+  }
+}
+
+hb-bicycles-tile{
+  @media #{$media-to-md} {
+    order: 1;
+  }
+}

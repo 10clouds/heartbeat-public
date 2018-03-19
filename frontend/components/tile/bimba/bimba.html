@@ -1,0 +1,70 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<dom-module id="hb-bimba-tile">
+
+  <template>
+    <hb-tile id="tile">
+      <value>
+        <template is="dom-repeat" items="{{stops}}" indexAs="index">
+          <div class="bimba-items">
+            <h2>{{item.stopName}}</h2>
+
+            <div class="bimba-items__icons">
+              <div class="bimba-items__icon">
+                <img class="app-img-svg" src="./../../../assets/tram.svg" alt="">
+              </div>
+              <div class="bimba-items__icon">
+                <img class="app-img-svg" src="./../../../assets/speed.svg" alt="">
+              </div>
+            </div>
+
+            <template is="dom-repeat" items="{{item.times}}" as="time" indexAs="index">
+              <div class="bimba-item fade">
+                <span>{{time.line}}</span>
+                <span>{{time.direction}}</span>
+                <span><span>{{time.minutes}}</span> min</span>
+                <span class$="{{getClasses(time.timeToGo)}}"><span>{{time.timeToGo}}</span> min</span>
+              </div>
+            </template>
+          </div>
+        </template>
+      </value>
+
+      <description>
+        <div class="hb-tile__footer">
+          <div class="hb-tile--icon">
+            <img class="app-img-svg" src="./../../../assets/tram.svg" alt="">
+          </div>
+          <p class="hb-tile__footer-header">BIMBA</p>
+        </div>
+      </description>
+    </hb-tile>
+
+    <socket-connection endpoint="bimba" on-data="onData">
+    </socket-connection>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'hb-bimba-tile',
+      homeOfficeCount: 0,
+      stops: [],
+      textClass: '',
+      onData: function (ev, data) {
+        this.stops = data;
+        this.$.tile.ping();
+      },
+      getClasses: function (time) {
+        if (time <= 5 && time > 2) {
+          this.textClass = 'text-orange'
+        } else if (time > 5) {
+          this.textClass = ''
+        } else {
+          this.textClass = 'text-alert'
+        }
+        return this.textClass;
+      }
+    });
+  </script>
+</dom-module>

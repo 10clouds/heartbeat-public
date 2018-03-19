@@ -1,0 +1,47 @@
+.ion-new {
+  padding: 10px 0;
+
+  &__item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    padding: 15% 0 0;
+
+    img {
+      width: 45%;
+      height: auto;
+      margin-bottom: 5%;
+      border-radius: 100%;
+    }
+  }
+
+  &__desc {
+    width: 100%;
+    min-height: 60px;
+  }
+
+  &__name {
+    margin: 0;
+    text-align: center;
+
+    span {
+      font-size: 22px;
+      letter-spacing: 0.05em;
+
+      @media #{$media-md-up} {
+        font-size: 1.4vw;
+      }
+    }
+  }
+
+  & &__role {
+    margin-top: 5px;
+    font-size: 14px;
+
+    @media #{$media-md-up} {
+      font-size: 0.9vw;
+    }
+  }
+}

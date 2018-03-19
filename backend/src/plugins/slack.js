@@ -14,6 +14,8 @@ module.exports = exports = {
 };
 
 function* fetchData(lastValues) {
+    logger.info('----------' + this.options.token);
+
     var slack = new Slack(this.options);
 
     try {
@@ -57,9 +59,13 @@ function Slack(options) {
 }
 Slack.prototype = _.create(SlackNode.prototype, {
     activeUsersInChannels: co(function * (supportedChannels) {
+
+
         var fullInfo = yield this.api('rtm.start');
+
         var idsInSupportedChannels = _(fullInfo.channels)
             .filter(function fromIncludedChannels(channel) {
+
                 return supportedChannels.indexOf(channel.name) !== -1 &&
                     channel.members &&
                     channel.is_archived === false;
@@ -68,11 +74,21 @@ Slack.prototype = _.create(SlackNode.prototype, {
             .flatten().uniq()
             .value();
         var isInSupportedChannels = _.partial(_.includes, idsInSupportedChannels);
-        return _(fullInfo.users)
+
+
+        var count = _(fullInfo.users)
             .filter('presence', 'active')
             .pluck('id')
             .filter(isInSupportedChannels)
             .size();
+
+
+        var users = fullInfo.users;
+
+        logger.info('----------' + users.length);
+
+
+        return count;
     }),
     fetchLastGif: co(function* (includeChannels) {
         var queries = _.flatten([

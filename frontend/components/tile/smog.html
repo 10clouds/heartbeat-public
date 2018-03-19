@@ -1,0 +1,72 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<dom-module id="hb-smog-tile">
+  <template>
+    <hb-tile id="tile">
+      <value>
+        <p class$="{{textClass}}">Smog - <span class="hb-smog-condition">{{condition}}</span></p>
+        <div class="hb-smog-data">
+          <span>Index:</span> <span>{{airQualityIndex}}</span>
+          <span>PM2,5:</span> <span><span>{{pm25Index}}</span>%</span>
+          <span>PM10:</span> <span><span>{{pm10Index}}</span>%</span>
+        </div>
+      </value>
+
+      <!--<description>SMOG</description>-->
+      <!--<endpoint>weather</endpoint>-->
+
+      <description>
+        <div class="hb-tile__footer">
+          <p class="hb-tile__footer-header">SMOG</p>
+          <p>weather</p>
+        </div>
+      </description>
+
+    </hb-tile>
+
+    <socket-connection endpoint="smog"
+                       on-data="onData">
+    </socket-connection>
+
+  </template>
+  <script>
+
+    Polymer({
+      is: 'hb-smog-tile',
+      homeOfficeCount: 0,
+      airQualityIndex: 0,
+      pollutionLevel: 0,
+      pm10Index: 0,
+      pm25Index: 0,
+      pm25acceptedLevel: 25,
+      pm10acceptedLevel: 50,
+      condition: '',
+      textClass: '',
+      onData: function (ev, data) {
+        var results = data.results;
+        this.pm10Index = (results.pm10 / this.pm10acceptedLevel * 100).toFixed(0);
+        this.pm25Index = (results.pm25 / this.pm25acceptedLevel * 100).toFixed(0);
+        this.airQualityIndex = Math.round(results.airQualityIndex);
+        this.pollutionLevel = results.pollutionLevel;
+        this.$.tile.ping();
+
+        this.smogStyles();
+      },
+      smogStyles: function () {
+        this.textClass = 'hb-smog-index ';
+
+        if (this.pollutionLevel >= 5) {
+          this.condition = 'bad';
+          this.textClass += ' text-alert'
+        } else if (this.pollutionLevel <= 2) {
+          this.condition = 'good';
+          this.textClass += ' text-green'
+        } else {
+          this.condition = 'medium';
+          // this.textClass += ' text-orange'
+        }
+      }
+    });
+  </script>
+</dom-module>

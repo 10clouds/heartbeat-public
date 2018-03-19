@@ -1,20 +1,23 @@
 var co      = require('bluebird').coroutine;
 var request = require('../utils/request.js');
+var logger      = require('../utils/logger.js');
 
 module.exports = exports = {
-    uniqueId: 'rooms',
+    uniqueId: 'luncher',
     options: {
         serverUrl: 'http://???',
         timeout: 5000
     },
-    httpRoute: '/rooms/all',
-    refetchInterval: 1000*62,
+    httpRoute: '/luncher/all',
+    refetchInterval: 1000 * 15 * 60,
     fetchData: co(fetchData)
 };
 
 function* fetchData() {
+    var todayDate = new Date().toISOString().slice(0, 10);
+
     var result = yield request({
-        url: this.options.serverUrl,
+        url: 'http://luncher.org/api/post?day='+ todayDate +'&hasChild=false&includeRestaurant=true',
         timeout: this.options.timeout
     });
 
@@ -27,8 +30,6 @@ function* fetchData() {
     var results = JSON.parse(response.body);
 
     return {
-        conferenceRoom: results.rooms[0].events,
-        socialRoom: results.rooms[1].events,
-        hamakowniaRoom: results.rooms[2].events,
+        results: results.posts
     };
 }

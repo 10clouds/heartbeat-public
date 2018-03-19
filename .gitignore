@@ -1,5 +1,9 @@
-backend/node_modules
 backend/npm-debug.log
 backend/logs/good.log
-frontend/bower_components
+**/bower_components
+**/node_modules
+package-lock.json
 *.sublime-*
+*/**/.DS_Store
+.DS_Store
+.idea/

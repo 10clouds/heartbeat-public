@@ -14,33 +14,37 @@ try {
     }
 }
 
-var Promise    = require('bluebird');
-var co         = Promise.coroutine;
-var Hapi       = require('hapi');
+var Promise = require('bluebird');
+var co = Promise.coroutine;
+var Hapi = require('hapi');
 var httpServer = new Hapi.Server();
-var io         = require('socket.io')(config.WebSocketsPort);
-var merge      = require('merge');
+var io = require('socket.io')(config.WebSocketsPort);
+var merge = require('merge');
 
 var logger = require('./utils/logger');
-var cache  = require('./utils/cache');
+var cache = require('./utils/cache');
 
 var SupportedPlugins = [
     require('./plugins/ion'),
-    // require('./plugins/rooms'),
-    require('./plugins/github'),
-    // require('./plugins/hipchat'),
+    require('./plugins/ion-employees'),
     require('./plugins/weather'),
-    // require('./plugins/breaking'),
-    require('./plugins/network'),
-    require('./plugins/slack')
+    require('./plugins/smog'),
+    require('./plugins/luncher'),
+    // require('./plugins/bimba'),
+    require('./plugins/bicycles'),
+    require('./plugins/github'),
+    // require('./plugins/facebook'),
+    require('./plugins/instagram')
 ];
 SupportedPlugins.forEach(function (plugin) {
+    logger.info(plugin.uniqueId);
+
     merge(plugin.options, config.plugins[plugin.uniqueId]);
 });
 var pluginsResults = {};
 
 var refetchPluginData = co(function* refetchPluginData(plugin) {
-    logger.info('Refetching %s data.', plugin.uniqueId);
+    //logger.info('Refetching %s data.', plugin.uniqueId);
     var oldData = pluginsResults[plugin.uniqueId];
     try {
         pluginsResults[plugin.uniqueId] = yield plugin.fetchData(oldData || {});
@@ -60,7 +64,9 @@ var refetchPluginData = co(function* refetchPluginData(plugin) {
 
 var initializePlugins = co(function* initializePlugins() {
     var refetchClosure = function (plugin) {
-        return function refetchPlugin() { return refetchPluginData(plugin); };
+        return function refetchPlugin() {
+            return refetchPluginData(plugin);
+        };
     };
 
     var promises = [];
@@ -83,14 +89,14 @@ function setupHttpRoutes() {
         reporters: [
             {
                 reporter: require('good-console'),
-                args:[{ log: '*', response: '*' }]
+                args: [{log: '*', response: '*'}]
             },
             {
                 reporter: require('good-file'),
                 args: [
                     './logs/good.log', {
-                    log: '*'
-                }]
+                        log: '*'
+                    }]
             }
         ]
     };
@@ -111,9 +117,9 @@ function setupHttpRoutes() {
 
     httpServer.route({
         method: 'GET',
-        path:'/all',
+        path: '/all',
         handler: function (request, reply) {
-           reply(pluginsResults);
+            reply(pluginsResults);
         }
     });
 
@@ -132,7 +138,7 @@ function setupHttpRoutes() {
 
 function setupWebSockets() {
     io.on('connection', function (socket) {
-        logger.info('New socket.io client connected.');
+        //logger.info('New socket.io client connected.');
         socket.once('established', function () {
             for (var i = 0; i < SupportedPlugins.length; i++) {
                 var plugin = SupportedPlugins[i];
@@ -142,7 +148,7 @@ function setupWebSockets() {
     });
 }
 
-function* main () {
+function* main() {
     var cachedResults = yield cache.restore();
 
     if (cachedResults) {
@@ -152,8 +158,8 @@ function* main () {
     setupHttpRoutes();
 
     yield initializePlugins();
-    logger.info('--- All plugins initialized. ---');
-    logger.info('--- HEARTBEAT ---');
+    //logger.info('--- All plugins initialized. ---');
+    //logger.info('--- HEARTBEAT ---');
 }
 
 co(main)();

@@ -1,0 +1,40 @@
+
+.hb-smog-tile .hb-tile {
+  padding-bottom: 1em;
+}
+
+.hb-smog {
+  $this: &;
+
+  &-tile {
+    #{$this}-condition,
+    #{$this}-index {
+      font-family: 'axis';
+      margin: 10px 0;
+      font-size: 30px;
+
+      @media #{$media-md-up} {
+        font-size: 1.4vw;
+      }
+    }
+  }
+
+  &-data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    span {
+      width: 48%;
+      padding: 0;
+
+      &:nth-child(odd) {
+        text-align: right;
+      }
+
+      &:nth-child(even) {
+        text-align: left;
+      }
+    }
+  }
+}

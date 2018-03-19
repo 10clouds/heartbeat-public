@@ -1,0 +1,48 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<dom-module id="hb-instagram-tile">
+
+  <template>
+    <hb-tile id="tile">
+      <value>
+        <template is="dom-repeat" items="{{photos}}" indexAs="index">
+          <div class="photos-item photos-item--inst fade" style$="{{ itemStyle(item.picture, index) }}">
+          </div>
+        </template>
+      </value>
+
+    </hb-tile>
+
+    <socket-connection endpoint="instagram" on-data="onData"></socket-connection>
+  </template>
+
+  <script>
+    var instSlideIndex = 0,
+      instRefreshed = false;
+
+    Polymer({
+      is: 'hb-instagram-tile',
+      photos: [],
+      onData: function (ev, data) {
+        this.photos = data;
+        this.$.tile.ping();
+
+        //Fired only once
+        if (instRefreshed === false) {
+          slider.showSlides("photos-item--inst", instSlideIndex, 10000);
+        }
+        fbRefreshed = true;
+      },
+      itemStyle: function (img, index) {
+        if (index == 0) {
+          return 'display:block; background-image:url(' + img + ')'
+        }
+        return 'display:none; background-image:url(' + img + ')';
+      }
+    });
+
+  </script>
+</dom-module>
+
+

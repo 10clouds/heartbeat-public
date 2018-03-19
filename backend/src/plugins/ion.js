@@ -1,7 +1,7 @@
-var moment  = require('moment');
+var moment = require('moment');
 var request = require('../utils/request.js');
-var co      = require('bluebird').coroutine;
-var logger  = require('../utils/logger.js');
+var co = require('bluebird').coroutine;
+var logger = require('../utils/logger.js');
 
 module.exports = exports = {
     uniqueId: 'ion',
@@ -21,9 +21,9 @@ function* fetchData() {
     var reqOptions = {
         rejectUnauthorized: false,
         url: this.options.serverUrl + '/api/events/availability/' +
-             '?on=' + date +
-             '&format=json' +
-             '&overlapping=false',
+        '?on=' + date +
+        '&format=json' +
+        '&overlapping=false',
         headers: {
             Authorization: this.options.token
         }
@@ -39,22 +39,28 @@ function* fetchData() {
 
     var data = JSON.parse(params[1]);
 
+
     function aggregateUserEvents(events) {
-        events.forEach(function(event) {
+        events.forEach(function (event) {
             event.start = new Date(event.start);
             event.end = new Date(event.end);
         });
 
-        return events.reduce(function(info, event) {
-            var time = event.end - event.start;
-            if (event.type === 'work-schedule') {
-                var location = event.data.location;
-                info.timeWorking = time;
-                info.timeAt[location] = info.timeAt[location] || 0;
-                info.timeAt[location] += time;
-            }
-            else if (event.type === 'time-off') {
-                info.timeAway += time;
+        return events.reduce(function (info, event) {
+
+            if (event.start < new Date() && event.end > new Date()) {
+
+                var time = event.end - event.start;
+
+                if (event.type === 'work-schedule') {
+                    var location = event.data.location;
+                    info.timeWorking = time;
+                    info.timeAt[location] = info.timeAt[location] || 0;
+                    info.timeAt[location] += time;
+                }
+                else if (event.type === 'time-off') {
+                    info.timeAway += time;
+                }
             }
 
             return info;
@@ -65,20 +71,20 @@ function* fetchData() {
         });
     }
 
-    for(var username in data.users){
-        var aggregates = aggregateUserEvents(data.users[username]);
 
-        if (aggregates.timeWorking > 0) {
-            usersCnt++;
-        }
+    for (var username in data.users) {
+        var aggregates = aggregateUserEvents(data.users[username]);
 
         if (aggregates.timeAt[this.options.homeLocationIndex]) {
             homeOfficeCnt++;
+        }
+        else if (aggregates.timeWorking > 0) {
+            usersCnt++;
         }
     }
 
     return {
         users: usersCnt,
-        homeoffice: homeOfficeCnt
+        homeoffice: homeOfficeCnt,
     };
 }

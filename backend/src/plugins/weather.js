@@ -7,7 +7,7 @@ module.exports = exports = {
         serverUrl: '',
     },
     httpRoute: '/weather/all',
-    refetchInterval: 1000 * 15 * 56,
+    refetchInterval: 1000 * 12 * 60,
     fetchData: co(fetchData)
 };
 

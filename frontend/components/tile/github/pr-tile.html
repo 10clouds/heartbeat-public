@@ -2,22 +2,23 @@
 <link rel="import" href="../../socket-connection.html">
 
 <dom-module id="hb-github-pr-tile">
-  <style>
-    :host hb-tile {
-      background: #fad733;
-    }
 
-    :host(:nth-child(even)) hb-tile {
-      background: #eed329;
-    }
-  </style>
   <template>
 
     <hb-tile id="tile">
-      <value>{{ openPullRequests }}</value>
-      <header>open pr</header>
-      <description>this week</description>
-      <endpoint>Github</endpoint>
+      <value>
+        <img class="app-img-svg" src="./../../../assets/idea.svg" alt="">
+        <span>{{ openPullRequests }}</span>
+      </value>
+
+      <description>
+        <div class="hb-tile__footer">
+          <p>this week</p>
+          <p class="hb-tile__footer-header">open pr</p>
+          <p>Github</p>
+        </div>
+      </description>
+
     </hb-tile>
 
     <socket-connection endpoint="github"

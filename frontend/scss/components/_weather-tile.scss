@@ -1,0 +1,17 @@
+
+.weather-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+  i{
+    font-size: 3vw;
+    height: 3.5vw;
+  }
+
+  .weather-temperature {
+    margin-left: 10px;
+  }
+}
+

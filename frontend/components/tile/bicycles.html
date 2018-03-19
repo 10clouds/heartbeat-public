@@ -1,0 +1,43 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<dom-module id="hb-bicycles-tile">
+
+  <template>
+    <hb-tile id="tile">
+      <value class="value-no-margin">
+        <template is="dom-repeat" items="{{bicycles}}" indexAs="index">
+          <div class="bicycles-item fade">
+            <p class="bicycles-item__name">{{item.name}}</p>
+            <span class="bicycles-item__count">Bikes: <span>{{item.bikes}}</span></span>
+          </div>
+        </template>
+      </value>
+
+      <description>
+        <div class="hb-tile__footer">
+          <div class="hb-tile__icon">
+            <img class="app-img-svg" src="./../../../assets/bicycle.svg" alt="">
+          </div>
+          <p class="hb-tile__footer-header">Bike</p>
+        </div>
+      </description>
+    </hb-tile>
+
+    <socket-connection endpoint="bicycles" on-data="onData"></socket-connection>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'hb-bicycles-tile',
+      lunches: [],
+      onData: function (ev, data) {
+        this.bicycles = data;
+        this.$.tile.ping();
+      }
+    });
+
+  </script>
+</dom-module>
+
+

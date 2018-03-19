@@ -1,31 +1,11 @@
 <dom-module id="hb-welcome-tile">
-  <style>
-    .app-logo {
-      background: #113738;
-      color: #fff;
-    }
-
-    .app-logo value {
-      position: absolute;
-      top: 40%;
-      left: 0;
-      width: 100%;
-      font-size: 28px !important;
-    }
-
-    .app-logo header {
-      position: absolute;
-      top: 85%;
-      left: 0;
-      width: 100%;
-      font-size: 3em !important;
-    }
-  </style>
-
   <template>
-    <hb-tile class="tile app-logo">
-      <value class="app-logo-value">Heartbeat</value>
-      <header class="app-logo-value">{{ currentTime }}</header>
+    <hb-tile class="app-logo">
+      <value class="app-logo-value app-logo-value--img">
+        <img src="../../assets/10clouds-logo.svg" alt="">
+        <p class="app-logo-city">Warsaw</p>
+      </value>
+      <header class="app-logo-value"><p>{{ currentTime }}</p></header>
     </hb-tile>
   </template>
 
@@ -37,16 +17,16 @@
       formatDate: function (date) {
         return date.getHours() + ':' +
           (date.getMinutes() > 9 ?
-            date.getMinutes() :
-            '0' + date.getMinutes()
+              date.getMinutes() :
+              '0' + date.getMinutes()
           ) + ':' +
           (date.getSeconds() > 9 ?
-            date.getSeconds() :
-            '0' + date.getSeconds()
+              date.getSeconds() :
+              '0' + date.getSeconds()
           );
       },
 
-      ready: function() {
+      ready: function () {
         var that = this;
         setInterval(function () {
           var date = new Date();

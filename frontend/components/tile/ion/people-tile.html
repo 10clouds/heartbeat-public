@@ -2,22 +2,25 @@
 <link rel="import" href="../../socket-connection.html">
 
 <dom-module id="hb-ion-people-tile">
-  <style>
-    :host hb-tile {
-      background: #44c644;
-    }
-
-    :host(:nth-child(even)) hb-tile {
-      background: #36bd36;
-    }
-  </style>
-
   <template>
-    <hb-tile id="tile" class="ion">
-      <value>{{ usersCount }}</value>
-      <header>people</header>
-      <description>@work</description>
-      <endpoint>ION</endpoint>
+    <hb-tile id="tile" class$="[[allPeopleBorderClass]]">
+      <value>
+        <img class="app-img-svg" src="./../../../assets/people.svg" alt="">
+        <span class$="[[allPeopleTextClass]]">{{ usersCount }}</span>
+      </value>
+      <!--<header>people</header>-->
+      <!--<description>@office</description>-->
+      <!--<endpoint>ION</endpoint>-->
+
+
+      <description>
+        <div class="hb-tile__footer">
+          <p>people</p>
+          <p class="hb-tile__footer-header">@office</p>
+          <p>ION</p>
+        </div>
+      </description>
+
     </hb-tile>
 
     <socket-connection endpoint="ion"
@@ -30,8 +33,18 @@
     Polymer({
       is: 'hb-ion-people-tile',
       usersCount: 0,
+      allPeopleCount: 0,
+      allPeopleTextClass: '',
+      allPeopleBorderClass: '',
       onData: function (ev, data) {
         this.usersCount = data.users;
+        this.allPeopleCount = data.allPeopleCount;
+
+        if ((this.usersCount > 0) && (this.usersCount == this.allPeopleCount)) {
+          this.allPeopleTextClass = 'text-green';
+          this.allPeopleBorderClass = 'border-green';
+        }
+
         this.$.tile.ping();
       }
     });

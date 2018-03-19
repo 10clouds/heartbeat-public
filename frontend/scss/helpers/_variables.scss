@@ -1,0 +1,30 @@
+/* Colors
+-------------------------------------------------------------- */
+$ebony: #141833;
+$ebony-light: #262940;
+$haiti: #0B0618;
+$purple: #5E2FE1;
+$green: #00d69e;
+$red: #ef665e;
+$orange: #FFC088;
+
+/* Breakpoints
+-------------------------------------------------------------- */
+// Extra small screen / phone
+$screen-xs:                  480px !default;
+
+// Small screen / tablet
+$screen-sm:                  768px !default;
+
+// Medium screen / desktop
+$screen-md:                  992px !default;
+
+// Large screen / wide desktop
+$screen-lg:                  1200px !default;
+
+// Large screen / wide desktop
+$screen-lg-xl:               1600px !default;
+
+$screen-xs-max:              ($screen-sm - 1) !default;
+$screen-sm-max:              ($screen-md - 1) !default;
+$screen-md-max:              ($screen-lg - 1) !default;

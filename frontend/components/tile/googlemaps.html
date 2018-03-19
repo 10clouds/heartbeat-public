@@ -1,0 +1,142 @@
+<link rel="import" href="../tile.html">
+<link rel="import" href="../../socket-connection.html">
+
+<dom-module id="hb-traffic-tile">
+
+  <template>
+    <hb-tile id="tile">
+      <value class="value-no-margin">
+        <div class="hb-traffic__map" id="map"></div>
+      </value>
+
+      <!--<description>-->
+        <!--Traffic-->
+      <!--</description>-->
+      <!--<endpoint>-->
+        <!--Google maps-->
+      <!--</endpoint>-->
+
+
+      <description>
+        <div class="hb-tile__footer">
+          <p class="hb-tile__footer-header">Traffic</p>
+          <p>Google maps</p>
+        </div>
+      </description>
+    </hb-tile>
+  </template>
+  <script>
+    Polymer({
+      is: 'hb-traffic-tile'
+    });
+
+    function initMap() {
+      var myLatLng = {lat: 52.237227, lng: 21.050105};
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: myLatLng,
+        disableDefaultUI: true,
+        styles: [
+          {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+          {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+          {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+          {
+            featureType: 'administrative.locality',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#d59563'}]
+          },
+          {
+            featureType: 'poi',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#d59563'}]
+          },
+          {
+            featureType: 'poi.park',
+            elementType: 'geometry',
+            stylers: [{color: '#263c3f'}]
+          },
+          {
+            featureType: 'poi.park',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#6b9a76'}]
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: [{color: '#38414e'}]
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry.stroke',
+            stylers: [{color: '#212a37'}]
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#9ca5b3'}]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'geometry',
+            stylers: [{color: '#746855'}]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'geometry.stroke',
+            stylers: [{color: '#1f2835'}]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#f3d19c'}]
+          },
+          {
+            featureType: 'transit',
+            elementType: 'geometry',
+            stylers: [{color: '#2f3948'}]
+          },
+          {
+            featureType: 'transit.station',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#d59563'}]
+          },
+          {
+            featureType: 'water',
+            elementType: 'geometry',
+            stylers: [{color: '#17263c'}]
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.fill',
+            stylers: [{color: '#515c6d'}]
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.stroke',
+            stylers: [{color: '#17263c'}]
+          }]
+      });
+
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: '10Clouds Poznań'
+      });
+
+      var trafficLayer = new google.maps.TrafficLayer();
+      trafficLayer.setMap(map);
+    }
+
+    window.setInterval(function () {
+      initMap();
+    }, 600000);
+  </script>
+
+  <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBFen1Bvn_WShsSXCoXkGQt4BnrHpDGr8&callback=initMap">
+  </script>
+
+</dom-module>
+
+

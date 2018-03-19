@@ -1,4 +1,4 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="https://unpkg.com/Polymer@1.6.1--/polymer.html">
 
 <dom-module id="socket-connection">
   <script>
@@ -14,6 +14,7 @@
       socket.emit('established');
     });
     socket.on('connect', function () {
+      console.log('on connect')
       if (new Date() - connectionLostTime > RESTART_DELAY_MS) {
         console.log('Server was offline longer than ' +
                     (RESTART_DELAY_MS / 1000) +

@@ -2,21 +2,25 @@
 <link rel="import" href="../../socket-connection.html">
 
 <dom-module id="hb-ion-homeoffice-tile">
-  <style>
-    :host hb-tile {
-      background: #44c644;
-    }
 
-    :host(:nth-child(even)) hb-tile {
-      background: #36bd36;
-    }
-  </style>
   <template>
     <hb-tile id="tile">
-      <value>{{ homeOfficeCount }}</value>
-      <header>people</header>
-      <description>@Home</description>
-      <endpoint>ION</endpoint>
+      <value>
+        <img class="app-img-svg" src="./../../../assets/office.svg" alt="">
+        <span>{{ homeOfficeCount }}</span>
+      </value>
+
+      <!--<header>people</header>-->
+      <!--<description>@Home</description>-->
+      <!--<endpoint>ION</endpoint>-->
+
+      <description>
+        <div class="hb-tile__footer">
+          <p>people</p>
+          <p class="hb-tile__footer-header">@Home</p>
+          <p>ION</p>
+        </div>
+      </description>
     </hb-tile>
 
     <socket-connection endpoint="ion"
