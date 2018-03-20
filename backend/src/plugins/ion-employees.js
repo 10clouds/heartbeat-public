@@ -30,6 +30,9 @@ function* fetchData() {
     }
 
     var data = JSON.parse(params[1]);
+    var people = data.results.filter(function(person) {
+      return person.role !== 'TEST USER';
+    });
 
-    return _.takeRight(data.results, 20);
+    return _.takeRight(people, 10);
 }

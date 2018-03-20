@@ -32,9 +32,11 @@ var SupportedPlugins = [
     require('./plugins/luncher'),
     // require('./plugins/bimba'),
     require('./plugins/bicycles'),
+    // require('./plugins/slack'),
     require('./plugins/github'),
-    // require('./plugins/facebook'),
-    require('./plugins/instagram')
+    require('./plugins/facebook'),
+    // require('./plugins/instagram')
+
 ];
 SupportedPlugins.forEach(function (plugin) {
     logger.info(plugin.uniqueId);
