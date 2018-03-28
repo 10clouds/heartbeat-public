@@ -461,9 +461,6 @@ body {
               flex-direction: column;
       height: 100vh;
       min-height: 1000px; } }
-  @media only screen and (min-width: 1600px) {
-    .grid {
-      min-height: 1200px; } }
   .grid .tile {
     width: calc(50% - 20px); }
     @media only screen and (min-width: 992px) {
@@ -511,7 +508,7 @@ body {
   margin: 10px; }
   @media only screen and (min-width: 992px) {
     .tile {
-      height: calc(25% - 40px); } }
+      height: calc(25% - 30px); } }
   .tile > hb-tile, .tile {
     -webkit-box-shadow: 6px 12px 44px -1px rgba(21, 20, 20, 0.8);
             box-shadow: 6px 12px 44px -1px rgba(21, 20, 20, 0.8); }
@@ -521,7 +518,7 @@ body {
     width: 100%; }
     @media only screen and (min-width: 992px) {
       .tile-xlarge, .tile--long {
-        height: calc(((25% - 40px) * 2) + 20px); } }
+        height: calc(((25% - 30px) * 2) + 20px); } }
   .tile hb-tile {
     height: 100%; }
   .tile--no-desc header, .tile--no-desc value, .tile--no-desc endpoint {
@@ -723,8 +720,10 @@ body {
 
 .hb-traffic__map {
   width: 100%;
-  height: 37vh;
-  min-height: 420px; }
+  height: 37vh; }
+  @media only screen and (min-width: 1600px) {
+    .hb-traffic__map {
+      min-height: 420px; } }
 
 .ion-new {
   padding: 10px 0; }

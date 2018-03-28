@@ -36,7 +36,7 @@
   margin: 10px;
 
   @media #{$media-md-up} {
-    height: calc(25% - 40px);
+    height: calc(25% - 30px);
   }
 
   > hb-tile, & {
@@ -50,7 +50,7 @@
     width: 100%;
 
     @media #{$media-md-up} {
-      height: calc(((25% - 40px) * 2) + 20px);
+      height: calc(((25% - 30px) * 2) + 20px);
     }
   }
 
