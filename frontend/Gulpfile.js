@@ -3,7 +3,8 @@ var gulp = require('gulp'),
     postcss = require('gulp-postcss'),
     autoprefixer = require('autoprefixer'),
     cssmin = require('gulp-cssmin'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    runSequence = require('run-sequence');
 
 gulp.task('sass', function () {
     return gulp.src('./scss/styles.scss')
@@ -20,6 +21,10 @@ gulp.task('sass:uglify', function () {
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('./styles'));
 
+});
+
+gulp.task('sass:production', function (cb) {
+    runSequence('sass', 'sass:uglify', cb);
 });
 
 gulp.task('sass:watch', function () {

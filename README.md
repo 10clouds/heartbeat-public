@@ -48,3 +48,19 @@ It's will try to listening on following host ports: 8080, 3000, 8123
 Port 8080 is heartbeat site static content. Second ones are backend.
 Customize ports if you need it. Above commands run processes that should
 be automatically pick up when their fall.
+
+# Styles
+Firstly download all npm packages - run from frontend directory
+```
+npm install
+```
+
+To watch changes in scss file run from frontend directory
+```
+gulp sass:watch
+```
+
+To build production css run
+```
+gulp sass:production
+```
