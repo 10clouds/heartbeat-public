@@ -1,13 +1,21 @@
 
-.bicycles-item{
-  margin-bottom:20px;
+.bicycles-item {
+  margin-bottom: 20px;
 
-  & &__name{
+  @media #{$media-lg-xl} {
+    margin-bottom: 15px;
+  }
+
+  & &__name {
     margin-bottom: 5px;
+
+    @media #{$media-lg-xl} {
+      margin-top: 0;
+    }
   }
 }
 
-hb-bicycles-tile{
+hb-bicycles-tile {
   @media #{$media-to-md} {
     order: 1;
   }

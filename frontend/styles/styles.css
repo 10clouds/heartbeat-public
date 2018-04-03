@@ -693,6 +693,9 @@ body {
     left: 0;
     width: 100%;
     font-size: 2.5vw; }
+    @media only screen and (min-width: 1600px) {
+      .app-logo header {
+        bottom: 3%; } }
     .app-logo header p {
       margin: 0; }
   .app-logo-value {
@@ -713,6 +716,9 @@ body {
     @media only screen and (min-width: 992px) {
       .app-logo-city {
         font-size: 1.7vw; } }
+    @media only screen and (min-width: 1600px) {
+      .app-logo-city {
+        margin-top: -15px; } }
 
 .hb-traffic-tile value {
   display: block;
@@ -723,7 +729,7 @@ body {
   height: 37vh; }
   @media only screen and (min-width: 1600px) {
     .hb-traffic__map {
-      min-height: 420px; } }
+      min-height: 400px; } }
 
 .ion-new {
   padding: 10px 0; }
@@ -767,8 +773,14 @@ body {
 
 .bicycles-item {
   margin-bottom: 20px; }
+  @media only screen and (min-width: 1600px) {
+    .bicycles-item {
+      margin-bottom: 15px; } }
   .bicycles-item .bicycles-item__name {
     margin-bottom: 5px; }
+    @media only screen and (min-width: 1600px) {
+      .bicycles-item .bicycles-item__name {
+        margin-top: 0; } }
 
 @media only screen and (max-width: 1199px) {
   hb-bicycles-tile {
