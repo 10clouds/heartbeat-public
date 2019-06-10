@@ -1,5 +1,7 @@
-FROM jorgenfb/nginx-nodejs-bower-gulp
+FROM jorgenfb/nginx-nodejs
 MAINTAINER wiktor.obrebski <wiktor.obrebski@10clouds.com>
+
+RUN npm install -g bower gulp
 
 ADD ./bower.json /usr/share/nginx/html/bower.json
 ADD . /usr/share/nginx/html

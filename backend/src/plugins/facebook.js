@@ -43,6 +43,5 @@ function* fetchData() {
             }
         })
     });
-
     return selectedPhotos;
 }

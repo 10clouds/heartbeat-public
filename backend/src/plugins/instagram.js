@@ -26,7 +26,7 @@ function* fetchData() {
     var response = result[0];
 
     if (response.statusCode !== 200) {
-        logger.warn('Failed fetching facebook data');
+        logger.warn('Failed fetching instagram data');
         return null;
     }
 

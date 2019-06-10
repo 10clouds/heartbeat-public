@@ -3,9 +3,7 @@
 <dom-module id="socket-connection">
   <script>
   (function () {
-    var protocol = window.location.protocol;
-    var hostname = window.location.hostname;
-    var socketUrl = protocol + '//' + hostname + ':3000';
+    var socketUrl = window.location.protocol + '//' + window.location.hostname + ':3000';
     var connectionLostTime = new Date();
     var RESTART_DELAY_MS = 30 * 1000;
 
