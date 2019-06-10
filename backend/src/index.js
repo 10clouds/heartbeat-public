@@ -29,7 +29,6 @@ var SupportedPlugins = [
     require('./plugins/ion-employees'),
     require('./plugins/weather'),
     // require('./plugins/smog'),
-    require('./plugins/luncher'),
     // require('./plugins/bimba'),
     require('./plugins/bicycles'),
     // require('./plugins/slack'),
