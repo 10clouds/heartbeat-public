@@ -2,13 +2,16 @@
   "name": "heartbeat-v2",
   "version": "0.4.0",
   "description": "",
+  "scripts": {
+    "watch-styles": "gulp sass:watch"
+  },
   "devDependencies": {
-    "autoprefixer": "^8.0.0",
-    "gulp": "^3.9.1",
-    "gulp-cssmin": "^0.2.0",
-    "gulp-postcss": "^7.0.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "run-sequence": "^2.2.1"
+    "autoprefixer": "8.0.0",
+    "gulp": "3.9.1",
+    "gulp-cssmin": "0.2.0",
+    "gulp-postcss": "7.0.1",
+    "gulp-rename": "1.2.2",
+    "gulp-sass": "3.1.0",
+    "run-sequence": "2.2.1"
   }
 }

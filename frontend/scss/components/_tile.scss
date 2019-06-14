@@ -12,7 +12,8 @@
 
   hb-tiles-grid {
     @media #{$media-md-up} {
-      width: 70%;
+      // width: 70%;
+      flex: 7;
     }
   }
 
@@ -22,7 +23,8 @@
     align-content: flex-start;
 
     @media #{$media-md-up} {
-      width: 30%;
+      // width: 30%;
+      flex: 3;
     }
 
     hb-tile {
