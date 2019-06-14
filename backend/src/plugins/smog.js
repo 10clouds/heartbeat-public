@@ -1,6 +1,6 @@
-var co      = require('bluebird').coroutine;
-var request = require('../utils/request.js');
-var logger      = require('../utils/logger.js');
+const co      = require('bluebird').coroutine;
+const request = require('../utils/request.js');
+const logger      = require('../utils/logger.js');
 
 module.exports = exports = {
     uniqueId: 'smog',

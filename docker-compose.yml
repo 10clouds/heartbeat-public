@@ -1,9 +1,10 @@
 backend:
   build: ./backend
-  command: nodemon --harmony src/index.js
+  command: npm run start-dev
   ports:
    - "3000:3000"
    - "8123:8123"
+  working_dir: /usr/src/app
   volumes:
    - ./backend:/usr/src/app
 frontend:

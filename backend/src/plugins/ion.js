@@ -1,7 +1,7 @@
-var moment = require('moment');
-var request = require('../utils/request.js');
-var co = require('bluebird').coroutine;
-var logger = require('../utils/logger.js');
+const moment = require('moment');
+const request = require('../utils/request.js');
+const co = require('bluebird').coroutine;
+const logger = require('../utils/logger.js');
 
 module.exports = exports = {
     uniqueId: 'ion',

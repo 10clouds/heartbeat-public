@@ -1,5 +1,5 @@
-var co      = require('bluebird').coroutine;
-var request = require('../utils/request.js');
+const co      = require('bluebird').coroutine;
+const request = require('../utils/request.js');
 
 module.exports = exports = {
     uniqueId: 'weather',

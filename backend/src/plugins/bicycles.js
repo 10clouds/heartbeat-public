@@ -1,7 +1,7 @@
-var co = require('bluebird').coroutine;
-var request = require('../utils/request.js');
-var logger = require('../utils/logger.js');
-var converter = require('xml-js');
+const co = require('bluebird').coroutine;
+const request = require('../utils/request.js');
+const logger = require('../utils/logger.js');
+const converter = require('xml-js');
 
 module.exports = exports = {
     uniqueId: 'bicycles',

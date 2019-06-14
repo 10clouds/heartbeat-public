@@ -1,8 +1,8 @@
-var _       = require('lodash');
-var http    = require('http');
-var logger  = require('../utils/logger.js');
-var Promise = require('bluebird');
-var request = require('../utils/request.js');
+const _       = require('lodash');
+const http    = require('http');
+const logger  = require('../utils/logger.js');
+const Promise = require('bluebird');
+const request = require('../utils/request.js');
 
 module.exports = exports = {
     uniqueId: 'github',

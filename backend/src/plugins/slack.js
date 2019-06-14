@@ -1,9 +1,9 @@
-var Promise     = require('bluebird');
-var co          = Promise.coroutine;
-var _           = require('lodash');
-var SlackNode   = require('slack-node');
-var logger      = require('../utils/logger.js');
-var request     = require('../utils/request.js');
+const Promise     = require('bluebird');
+const co          = Promise.coroutine;
+const _           = require('lodash');
+const SlackNode   = require('slack-node');
+const logger      = require('../utils/logger.js');
+const request     = require('../utils/request.js');
 
 module.exports = exports = {
     uniqueId: 'slack',

@@ -1,8 +1,8 @@
-var moment = require('moment');
-var request = require('../utils/request.js');
-var co = require('bluebird').coroutine;
-var logger = require('../utils/logger.js');
-var _ = require('lodash');
+const moment = require('moment');
+const request = require('../utils/request.js');
+const co = require('bluebird').coroutine;
+const logger = require('../utils/logger.js');
+const _ = require('lodash');
 
 module.exports = exports = {
     uniqueId: 'ion-employees',
@@ -33,6 +33,5 @@ function* fetchData() {
     var people = data.results.filter(function(person) {
       return person.role !== 'TEST USER';
     });
-
     return _.takeRight(people, 10);
 }

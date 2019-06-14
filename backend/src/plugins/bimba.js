@@ -1,8 +1,8 @@
-var co = require('bluebird').coroutine;
-var request = require('../utils/request.js');
-var logger = require('../utils/logger.js');
-var rp = require('request-promise');
-var _ = require('lodash');
+const co = require('bluebird').coroutine;
+const request = require('../utils/request.js');
+const logger = require('../utils/logger.js');
+const rp = require('request-promise');
+const _ = require('lodash');
 
 
 module.exports = exports = {
