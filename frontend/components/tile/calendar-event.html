@@ -1,0 +1,40 @@
+<link rel="import" href="./tile.html">
+<link rel="import" href="./../socket-connection.html">
+
+<dom-module id="hb-calendar-event-tile">
+
+  <template>
+    <hb-tile id="tile">
+      <value>
+        <span>{{ nextEvent.summary }}</span>
+      </value>
+
+      <description>
+        <div class="hb-tile__footer">
+          <p>Next 10clouds Event</p>
+          <p class="hb-tile__footer-header">{{ nextEvent.startDate }}</p>
+          <p>10clouds</p>
+        </div>
+      </description>
+    </hb-tile>
+
+    <socket-connection endpoint="google-calendar"
+                       on-data="onData">
+    </socket-connection>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'hb-calendar-event-tile',
+      nextEvent: {
+        summary: '',
+        startDate: '',
+      },
+      onData: function (ev, data) {
+        this.nextEvent = data;
+        this.$.tile.autosizeFont(data.summary);
+        this.$.tile.ping();
+      }
+    });
+  </script>
+</dom-module>
