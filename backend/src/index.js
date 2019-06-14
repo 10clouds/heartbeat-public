@@ -31,6 +31,7 @@ var SupportedPlugins = [
     // require('./plugins/smog'),
     // require('./plugins/bimba'),
     require('./plugins/bicycles'),
+    require('./plugins/google-calendar'),
     // require('./plugins/slack'),
     require('./plugins/github'),
     require('./plugins/facebook'),

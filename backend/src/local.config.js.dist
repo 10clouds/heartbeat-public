@@ -11,6 +11,9 @@ module.exports = exports = {
             // home location, so we set in here, in options.
             homeLocationIndex: 1
         },
+        'google-calendar': {
+            calendarId: '10clouds.com_tqb8hc197h8huelk6i1qi67edg@group.calendar.google.com',
+        },
         rooms: {
             serverUrl: '',
             timeout: 500
