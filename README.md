@@ -49,7 +49,7 @@ Port 8080 is heartbeat site static content. Second ones are backend.
 Customize ports if you need it. Above commands run processes that should
 be automatically pick up when their fall.
 
-# Styles
+## Styles
 Firstly download all npm packages - run from frontend directory
 ```
 npm install
@@ -64,3 +64,12 @@ To build production css run
 ```
 gulp sass:production
 ```
+
+## Dribbble API access token
+Dribbble API has been designed to work in browser with real user. It use oauth2 mechanism to provide a access token.
+If you need new token, please try this steps:
+
+https://developer.dribbble.com/v2/oauth/
+ - visit https://dribbble.com/oauth/authorize?client_id=??? from account that you need access to with your app client id
+ - cut "code" parameter value from url that page redirect too
+ - replace it for token by POST https://dribbble.com/oauth/token with proper parameters

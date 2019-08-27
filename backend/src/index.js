@@ -32,9 +32,10 @@ var SupportedPlugins = [
     // require('./plugins/bimba'),
     require('./plugins/bicycles'),
     require('./plugins/google-calendar'),
+    require('./plugins/dribbble'),
     // require('./plugins/slack'),
-    require('./plugins/github'),
-    require('./plugins/facebook'),
+    // require('./plugins/github'),
+    // require('./plugins/facebook'),
     // require('./plugins/instagram')
 
 ];

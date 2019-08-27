@@ -5,18 +5,23 @@
   <template>
     <hb-tile id="tile" class$="[[allPeopleBorderClass]]">
       <value>
-        <img class="app-img-svg" src="./../../../assets/people.svg" alt="">
-        <span class$="[[allPeopleTextClass]]">{{ usersCount }}</span>
-      </value>
-      <!--<header>people</header>-->
-      <!--<description>@office</description>-->
-      <!--<endpoint>ION</endpoint>-->
+        <div class="ion-people">
+          <div>
+            <img class="app-img-svg" src="./../../../assets/people.svg" alt="">
+            <span class$="[[allPeopleTextClass]]">{{ usersCount }}</span>
+          </div>
 
+          <div>
+            <img class="app-img-svg" src="./../../../assets/office.svg" alt="">
+            <span class$="[[allPeopleTextClass]]">{{ homeOfficeCount }}</span>
+          </div>
+        </div>
+      </value>
 
       <description>
         <div class="hb-tile__footer">
           <p>people</p>
-          <p class="hb-tile__footer-header">@office</p>
+          <p class="hb-tile__footer-header">@office/@home</p>
           <p>ION</p>
         </div>
       </description>
@@ -39,6 +44,7 @@
       onData: function (ev, data) {
         this.usersCount = data.users;
         this.allPeopleCount = data.allPeopleCount;
+        this.homeOfficeCount = data.homeoffice;
 
         if ((this.usersCount > 0) && (this.usersCount == this.allPeopleCount)) {
           this.allPeopleTextClass = 'text-green';
