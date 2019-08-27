@@ -3,33 +3,34 @@
     <hb-tile class="app-logo">
       <value class="app-logo-value app-logo-value--img">
         <img src="../../assets/10clouds-logo.svg" alt="">
-        <p class="app-logo-city">Warsaw</p>
+        <p class="app-logo-city">{{ currentDate }} Warsaw</p>
       </value>
       <header class="app-logo-value"><p>{{ currentTime }}</p></header>
     </hb-tile>
   </template>
 
   <script>
+    function pref(number) {
+      return number > 9 ? number : ("0" + number);
+    }
+
     Polymer({
       is: 'hb-welcome-tile',
       currentTime: '00:00:00',
 
       formatDate: function (date) {
-        return date.getHours() + ':' +
-          (date.getMinutes() > 9 ?
-              date.getMinutes() :
-              '0' + date.getMinutes()
-          ) + ':' +
-          (date.getSeconds() > 9 ?
-              date.getSeconds() :
-              '0' + date.getSeconds()
-          );
+        var hourPart =
+          date.getHours() + ':' +
+          pref(date.getMinutes()) + ':' +
+          pref(date.getSeconds());
+        return hourPart;
       },
 
       ready: function () {
         var that = this;
         setInterval(function () {
           var date = new Date();
+          that.currentDate = new Date().toLocaleDateString("pl-PL");
           that.currentTime = that.formatDate(date);
         }, 1000);
       }
