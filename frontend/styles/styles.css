@@ -454,7 +454,7 @@ body {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -ms-flex-line-pack: left;
-      align-content: left; }
+      align-content: space-evenly; }
   @media only screen and (min-width: 992px) {
     .grid {
       -webkit-box-orient: vertical;

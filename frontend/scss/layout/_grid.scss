@@ -1,7 +1,7 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
-  align-content: left;
+  align-content: space-evenly;
 
   @media #{$media-md-up} {
     flex-direction: column;
