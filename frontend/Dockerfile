@@ -1,14 +1,11 @@
-FROM jorgenfb/nginx-nodejs
+FROM node:12.4.0
+
 MAINTAINER wiktor.obrebski <wiktor.obrebski@10clouds.com>
 
 RUN npm install -g bower gulp
 
-ADD ./bower.json /usr/share/nginx/html/bower.json
-ADD . /usr/share/nginx/html
+ADD . /app
 
-WORKDIR /usr/share/nginx/html
+WORKDIR /app
+
 RUN bower install --allow-root
-
-ADD ./nginx.conf /etc/nginx/nginx.conf
-
-CMD 'nginx'
