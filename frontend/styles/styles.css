@@ -453,7 +453,7 @@ body {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -ms-flex-line-pack: left;
+  -ms-flex-line-pack: space-evenly;
       align-content: space-evenly; }
   @media only screen and (min-width: 992px) {
     .grid {
@@ -810,3 +810,8 @@ body {
 .hb-instagram-tile .content-container, .hb-instagram-tile value, .hb-fb-tile .content-container, .hb-fb-tile value, .hb-dribbble-tile .content-container, .hb-dribbble-tile value {
   width: 100%;
   height: 100%; }
+
+#hb-calendar-event-tile
+.hb-calendar__footer-header {
+  font-family: Lato;
+  font-weight: bold; }

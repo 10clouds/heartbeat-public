@@ -1,4 +1,4 @@
-FROM node:12.4.0
+FROM node:11
 
 MAINTAINER wiktor.obrebski <wiktor.obrebski@10clouds.com>
 
