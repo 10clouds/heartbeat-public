@@ -3,7 +3,8 @@
   "version": "0.4.0",
   "description": "",
   "scripts": {
-    "watch-styles": "gulp sass:watch"
+    "watch-styles": "gulp sass:watch",
+    "build-styles": "gulp sass:production"
   },
   "devDependencies": {
     "autoprefixer": "8.0.0",

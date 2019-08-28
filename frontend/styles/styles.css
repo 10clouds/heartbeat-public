@@ -811,7 +811,6 @@ body {
   width: 100%;
   height: 100%; }
 
-#hb-calendar-event-tile
-.hb-calendar__footer-header {
+.hb-calendar__summary {
   font-family: Lato;
   font-weight: bold; }
