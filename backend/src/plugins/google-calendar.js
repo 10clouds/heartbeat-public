@@ -40,6 +40,8 @@ async function fetchData() {
       timeMin: now,
       calendarId: this.options.calendarId,
       maxResults: 1,
+      singleEvents: true,
+      orderBy: "startTime"
     });
 
     const items = calendarsRes.data.items;
@@ -51,6 +53,8 @@ async function fetchData() {
 function mapExternalEvent(event) {
     return {
         summary: event.summary,
-        startDate: event.start.date,
+        startDate: event.start.date ||
+            (event.start.dateTime && event.start.dateTime.slice(0, 10)) ||
+            "",
     }
 }
